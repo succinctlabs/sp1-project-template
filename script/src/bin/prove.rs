@@ -70,7 +70,7 @@ fn main() {
     proof.public_values.read_slice(&mut bytes);
 
     // Deserialize the public values.
-    let (n, a, b) = PublicValuesTuple::abi_decode(&bytes, true).unwrap();
+    let (n, a, b) = PublicValuesTuple::abi_decode(&bytes, false).unwrap();
 
     // Create the testing fixture so we can test things end-ot-end.
     let fixture = SP1FibonacciProofFixture {
