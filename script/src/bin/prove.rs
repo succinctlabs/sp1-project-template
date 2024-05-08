@@ -61,16 +61,13 @@ fn main() {
     stdin.write(&args.n);
 
     // Generate the proof.
-    let mut proof = client
+    let proof = client
         .prove_groth16(&pk, stdin)
         .expect("failed to generate proof");
 
-    // Read the public values from the proof.
-    let mut bytes = Vec::new();
-    proof.public_values.read_slice(&mut bytes);
-
     // Deserialize the public values.
-    let (n, a, b) = PublicValuesTuple::abi_decode(&bytes, false).unwrap();
+    let bytes = proof.public_values.as_slice();
+    let (n, a, b) = PublicValuesTuple::abi_decode(bytes, false).unwrap();
 
     // Create the testing fixture so we can test things end-ot-end.
     let fixture = SP1FibonacciProofFixture {
