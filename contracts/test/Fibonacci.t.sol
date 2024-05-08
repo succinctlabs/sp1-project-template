@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 import {Test, console} from "forge-std/Test.sol";
 import {stdJson} from "forge-std/StdJson.sol";
 import {Fibonacci} from "../src/Fibonacci.sol";
-import {Verifier} from "../src/Groth16Verifier.sol";
+import {SP1Verifier} from "../src/SP1Verifier.sol";
 
 struct SP1ProofFixtureJson {
     uint32 a;
@@ -50,5 +50,5 @@ contract FibonacciTest is Test {
             fixture.publicValues,
             fixture.publicValues
         );
-    }
+    } 
 }

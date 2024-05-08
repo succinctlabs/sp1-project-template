@@ -8,6 +8,13 @@
 #![no_main]
 sp1_zkvm::entrypoint!(main);
 
+use alloy_sol_types::{sol, SolType};
+
+/// The public values encoded as a tuple that can be easily deserialized inside Solidity.
+type PublicValuesTuple = sol! {
+    tuple(uint32, uint32, uint32)
+};
+
 pub fn main() {
     // Read an input to the program.
     //
@@ -15,27 +22,23 @@ pub fn main() {
     // from the prover.
     let n = sp1_zkvm::io::read::<u32>();
 
-    // Write n to public input
-    sp1_zkvm::io::commit(&n);
-
     // Compute the n'th fibonacci number, using normal Rust code.
     let mut a = 0u32;
     let mut b = 1u32;
     for _ in 0..n {
         let mut c = a + b;
-        c %= 7919; // Modulus to prevent overflow.
+        c %= 7919;
         a = b;
         b = c;
     }
 
-    // Write the output of the program.
-    //
-    // Behind the scenes, this also compiles down to a custom system call which handles writing
-    // outputs to the prover.
-    sp1_zkvm::io::commit(&a);
-    sp1_zkvm::io::commit(&b);
+    // Encocde the public values of the program.
+    let bytes = PublicValuesTuple::abi_encode(&(n, a, b));
 
-    // Print out the commited values.
+    // Commit to the public values of the program.
+    sp1_zkvm::io::commit_slice(&bytes);
+
+    // Print out the public values.
     println!("n: {}", n);
     println!("a: {}", a);
     println!("b: {}", b);
