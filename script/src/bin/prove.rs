@@ -72,9 +72,9 @@ fn main() {
         a,
         b,
         n,
-        vkey: vk.bytes32().to_string(),
-        public_values: proof.public_values.bytes().to_string(),
-        proof: proof.bytes().to_string(),
+        vkey: vk.bytes32(),
+        public_values: proof.public_values.bytes(),
+        proof: proof.bytes(),
     };
 
     // The verification key is used to verify that the proof corresponds to the execution of the
