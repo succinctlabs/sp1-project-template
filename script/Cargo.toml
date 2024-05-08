@@ -12,7 +12,7 @@ name = "artifacts"
 path = "src/bin/artifacts.rs"
 
 [dependencies]
-sp1-sdk = { path = "../../sp1/sdk" }
+sp1-sdk = { git = "https://github.com/succinctlabs/sp1.git", rev = "v1.0.0-testnet" }
 serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
 serde = { version = "1.0", default-features = false, features = ["derive"] }
 clap = { version = "4.0", features = ["derive", "env"] }
