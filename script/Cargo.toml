@@ -8,33 +8,16 @@ name = "prove"
 path = "src/bin/prove.rs"
 
 [[bin]]
-name = "export"
-path = "src/bin/export.rs"
+name = "artifacts"
+path = "src/bin/artifacts.rs"
 
 [dependencies]
-alloy = { git = "https://github.com/alloy-rs/alloy", features = ["sol-types"] }
-sp1-sdk = { path = "../../sp1/sdk" }
-reqwest = { version = "0.11", features = ["json"] }
-tokio = { version = "1", features = ["full"] }
+sp1-sdk = { git = "https://github.com/succinctlabs/sp1.git", rev = "v1.0.0-testnet" }
 serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
 serde = { version = "1.0", default-features = false, features = ["derive"] }
-tendermint = { version = "0.35.0", default-features = false }
-tendermint-light-client-verifier = { version = "0.35.0", default-features = false, features = [
-    "rust-crypto",
-] }
-bincode = "1.3.3"
-itertools = "0.12.1"
-serde_cbor = "0.11.2"
-sha2 = "0.10.8"
-dotenv = "0.15.0"
-subtle-encoding = "0.5.1"
-ethers = "2.0.14"
-anyhow = "1.0.82"
 clap = { version = "4.0", features = ["derive", "env"] }
-log = "0.4.21"
-async-trait = "0.1.80"
-hex = "0.4.3"
 tracing = "0.1.40"
+alloy-sol-types = "0.7.2"
 
 [build-dependencies]
 sp1-helper = { git = "https://github.com/succinctlabs/sp1.git", rev = "277f1b4cfee5129bd40d74748f3d241cdfa56e63" }
