@@ -5,6 +5,7 @@ that can generate a proof of any RISC-V program and verify the proof onchain.
 
 ## Requirements
 
+- [Go](https://go.dev/doc/install)
 - [Rust](https://rustup.rs/)
 - [SP1](https://succinctlabs.github.io/sp1/getting-started/install.html)
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
