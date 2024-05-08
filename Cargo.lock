@@ -1572,6 +1572,7 @@ checksum = "38793c55593b33412e3ae40c2c9781ffaa6f438f6f8c10f24e71846fbd7ae01e"
 name = "fibonacci-script"
 version = "0.1.0"
 dependencies = [
+ "alloy-sol-types",
  "clap",
  "serde",
  "serde_json",

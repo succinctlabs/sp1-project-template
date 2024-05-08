@@ -50,5 +50,5 @@ contract FibonacciTest is Test {
             fixture.publicValues,
             fixture.publicValues
         );
-    }
+    } 
 }

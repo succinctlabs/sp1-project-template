@@ -69,7 +69,7 @@ contract SP1Verifier is Verifier {
     function hashPublicValues(
         bytes memory publicValues
     ) public pure returns (bytes32) {
-        return sha256(publicValues) & bytes32(uint256((1 << 254) - 1));
+        return sha256(publicValues) & bytes32(uint256((1 << 253) - 1));
     }
 
     /// @notice Verifies a proof with given public values and vkey.

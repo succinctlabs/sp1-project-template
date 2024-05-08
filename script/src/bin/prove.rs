@@ -8,6 +8,7 @@
 
 use std::path::PathBuf;
 
+use alloy_sol_types::{sol, SolType};
 use clap::Parser;
 use serde::{Deserialize, Serialize};
 use sp1_sdk::{HashableKey, ProverClient, SP1Stdin};
@@ -27,6 +28,11 @@ struct ProveArgs {
     #[clap(long, default_value = "../contracts/fixtures")]
     fixture_path: String,
 }
+
+/// The public values encoded as a tuple that can be easily deserialized inside Solidity.
+type PublicValuesTuple = sol! {
+    tuple(uint32, uint32, uint32)
+};
 
 /// A fixture that can be used to test the verification of SP1 zkVM proofs inside Solidity.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -63,9 +69,11 @@ fn main() {
         .expect("failed to generate proof");
 
     // Read the public values from the proof.
-    let n: u32 = proof.public_values.read();
-    let a: u32 = proof.public_values.read();
-    let b: u32 = proof.public_values.read();
+    let mut bytes = Vec::new();
+    proof.public_values.read_slice(&mut bytes);
+
+    // Deserialize the public values.
+    let (n, a, b) = PublicValuesTuple::abi_decode(&bytes, true).unwrap();
 
     // Create the testing fixture so we can test things end-ot-end.
     let fixture = SP1FibonacciProofFixture {
