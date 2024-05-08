@@ -24,9 +24,6 @@ pub const FIBONACCI_ELF: &[u8] = include_bytes!("../../../program/elf/riscv32im-
 struct ProveArgs {
     #[clap(long, default_value = "500")]
     n: u32,
-
-    #[clap(long, default_value = "../contracts/fixtures")]
-    fixture_path: String,
 }
 
 /// The public values encoded as a tuple that can be easily deserialized inside Solidity.
