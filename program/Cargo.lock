@@ -1238,7 +1238,7 @@ dependencies = [
 [[package]]
 name = "sp1-precompiles"
 version = "0.1.0"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=c27b97d1383350a092f5182af593203bc77dfbb6#c27b97d1383350a092f5182af593203bc77dfbb6"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=ratan/release-groth16-05-09#d7312778e77c96484fdf18dc1dbc61f4a7c2050c"
 dependencies = [
  "anyhow",
  "bincode",
@@ -1255,7 +1255,7 @@ dependencies = [
 [[package]]
 name = "sp1-zkvm"
 version = "0.1.0"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=c27b97d1383350a092f5182af593203bc77dfbb6#c27b97d1383350a092f5182af593203bc77dfbb6"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=ratan/release-groth16-05-09#d7312778e77c96484fdf18dc1dbc61f4a7c2050c"
 dependencies = [
  "bincode",
  "cfg-if",
