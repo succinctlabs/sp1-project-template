@@ -62,7 +62,7 @@ fn main() {
 
     // Generate the proof.
     let proof = client
-        .prove_groth16(&pk, stdin)
+        .prove_plonk(&pk, stdin)
         .expect("failed to generate proof");
 
     // Deserialize the public values.
