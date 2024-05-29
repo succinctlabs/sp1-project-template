@@ -11,16 +11,17 @@ that can generate a proof of any RISC-V program and verify the proof onchain.
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
 
 ## Generate Proof
+
+Generate the proof that will be used as a fixture in the contracts directory.
+
 ```
 RUST_LOG=info cargo run --package fibonacci-script --bin prove --release
 ```
 
-## Export Solidity Verifier
-```
-RUST_LOG=info cargo run -p fibonacci-script --bin artifacts --release
-```
-
 ## Solidity Proof Verification
+
+Verify the proof with the SP1 EVM verifier.
+
 ```
 cd contracts/
 forge test -v

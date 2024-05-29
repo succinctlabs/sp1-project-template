@@ -7,10 +7,6 @@ edition = "2021"
 name = "prove"
 path = "src/bin/prove.rs"
 
-[[bin]]
-name = "artifacts"
-path = "src/bin/artifacts.rs"
-
 [dependencies]
 sp1-sdk = { git = "https://github.com/succinctlabs/sp1.git", rev = "v1.0.0-testnet" }
 serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
