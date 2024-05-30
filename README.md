@@ -15,7 +15,8 @@ that can generate a proof of any RISC-V program and verify the proof onchain.
 Generate the proof that will be used as a fixture in the contracts directory.
 
 ```
-RUST_LOG=info cargo run --package fibonacci-script --bin prove --release
+cd script
+RUST_LOG=info cargo run --bin prove --release
 ```
 
 ## Solidity Proof Verification
@@ -23,7 +24,7 @@ RUST_LOG=info cargo run --package fibonacci-script --bin prove --release
 Verify the proof with the SP1 EVM verifier.
 
 ```
-cd contracts/
+cd ../contracts
 forge test -v
 ```
 
