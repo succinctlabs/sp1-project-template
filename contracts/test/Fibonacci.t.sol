@@ -46,9 +46,10 @@ contract FibonacciTest is Test {
 
     function testFail_InvalidFibonacciProof() public view {
         SP1ProofFixtureJson memory fixture = loadFixture();
-        fibonacci.verifyFibonacciProof(
-            fixture.publicValues,
-            fixture.publicValues
-        );
+
+        // Create a fake proof.
+        bytes memory fakeProof = new bytes(fixture.proof.length);
+
+        fibonacci.verifyFibonacciProof(fakeProof, fixture.publicValues);
     }
 }
