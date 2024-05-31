@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 import {Test, console} from "forge-std/Test.sol";
 import {stdJson} from "forge-std/StdJson.sol";
 import {Fibonacci} from "../src/Fibonacci.sol";
-import {SP1Verifier} from "../src/SP1Verifier.sol";
+import {SP1Verifier} from "@sp1-contracts/SP1Verifier.sol";
 
 struct SP1ProofFixtureJson {
     uint32 a;
@@ -45,10 +45,11 @@ contract FibonacciTest is Test {
     }
 
     function testFail_InvalidFibonacciProof() public view {
-         SP1ProofFixtureJson memory fixture = loadFixture();
-        fibonacci.verifyFibonacciProof(
-            fixture.publicValues,
-            fixture.publicValues
-        );
-    } 
+        SP1ProofFixtureJson memory fixture = loadFixture();
+
+        // Create a fake proof.
+        bytes memory fakeProof = new bytes(fixture.proof.length);
+
+        fibonacci.verifyFibonacciProof(fakeProof, fixture.publicValues);
+    }
 }
