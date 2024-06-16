@@ -27,6 +27,7 @@ pub fn main() {
     let mut b = 1u32;
     for _ in 0..n {
         let mut c = a + b;
+        c %= 7919;
         a = b;
         b = c;
     }
