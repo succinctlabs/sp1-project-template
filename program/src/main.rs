@@ -45,6 +45,5 @@ pub fn main() {
 
     // Print out the public values.
     println!("n: {}", n);
-    println!("a: {}", a);
-    println!("b: {}", b);
+    println!("fib(n): {}", b);
 }
