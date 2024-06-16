@@ -32,7 +32,7 @@ pub fn main() {
     let mut a = 0u32;
     let mut b = 1u32;
     for _ in 0..n {
-        let mut c = a + b;
+        let c = a + b;
         a = b;
         b = c;
     }
