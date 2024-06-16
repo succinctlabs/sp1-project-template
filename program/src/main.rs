@@ -22,6 +22,10 @@ pub fn main() {
     // from the prover.
     let n = sp1_zkvm::io::read::<u32>();
 
+    if n > 186 {
+        panic!("This simple fibonacci program doesn't support Fibonacci numbers larger than 186, as it would overflow a 32-bit integer.");
+    }
+
     // Compute the n'th fibonacci number, using normal Rust code.
     let mut a = 0u32;
     let mut b = 1u32;
