@@ -22,7 +22,7 @@ pub const FIBONACCI_ELF: &[u8] = include_bytes!("../../../program/elf/riscv32im-
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
 struct ProveArgs {
-    #[clap(long, default_value = "500")]
+    #[clap(long, default_value = "50")]
     n: u32,
 
     #[clap(long, default_value = "false")]
