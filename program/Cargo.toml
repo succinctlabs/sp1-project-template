@@ -6,4 +6,4 @@ edition = "2021"
 
 [dependencies]
 alloy-sol-types = "0.7.2"
-sp1-zkvm = { git = "https://github.com/succinctlabs/sp1.git", tag = "v1.0.4-testnet" }
+sp1-zkvm = { git = "https://github.com/succinctlabs/sp1.git", tag = "v1.0.7-testnet" }
