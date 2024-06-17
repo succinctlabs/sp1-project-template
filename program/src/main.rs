@@ -22,12 +22,17 @@ pub fn main() {
     // from the prover.
     let n = sp1_zkvm::io::read::<u32>();
 
+    if n > 186 {
+        panic!(
+            "This fibonacci program doesn't support n > 186, as it would overflow a 32-bit integer."
+        );
+    }
+
     // Compute the n'th fibonacci number, using normal Rust code.
     let mut a = 0u32;
     let mut b = 1u32;
     for _ in 0..n {
-        let mut c = a + b;
-        c %= 7919;
+        let c = a + b;
         a = b;
         b = c;
     }
@@ -37,9 +42,4 @@ pub fn main() {
 
     // Commit to the public values of the program.
     sp1_zkvm::io::commit_slice(&bytes);
-
-    // Print out the public values.
-    println!("n: {}", n);
-    println!("a: {}", a);
-    println!("b: {}", b);
 }
