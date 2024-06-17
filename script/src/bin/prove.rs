@@ -64,7 +64,7 @@ fn main() {
         let proof = client.prove(&pk, stdin).expect("failed to generate proof");
         let (_, _, fib_n) =
             PublicValuesTuple::abi_decode(proof.public_values.as_slice(), false).unwrap();
-
+        println!("Successfully generated proof!");
         println!("fib(n): {}", fib_n);
 
         // Verify the proof.
