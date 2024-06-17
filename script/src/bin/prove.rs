@@ -46,6 +46,8 @@ fn main() {
     let mut stdin = SP1Stdin::new();
     stdin.write(&args.n);
 
+    println!("n: {}", args.n);
+
     if args.evm {
         // Generate the proof.
         let proof = client
@@ -55,6 +57,10 @@ fn main() {
     } else {
         // Generate the proof.
         let proof = client.prove(&pk, stdin).expect("failed to generate proof");
+        let (_n, _a, b) =
+            PublicValuesTuple::abi_decode(proof.public_values.as_slice(), false).unwrap();
+
+        println!("fib(n): {}", b);
 
         // Verify the proof.
         client.verify(&proof, &vk).expect("failed to verify proof");
