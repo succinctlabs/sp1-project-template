@@ -29,6 +29,11 @@ struct ProveArgs {
     evm: bool,
 }
 
+/// The public values encoded as a tuple that can be easily deserialized inside Solidity.
+type PublicValuesTuple = sol! {
+    tuple(uint32, uint32, uint32)
+};
+
 fn main() {
     // Setup the logger.
     sp1_sdk::utils::setup_logger();
@@ -57,20 +62,15 @@ fn main() {
     } else {
         // Generate the proof.
         let proof = client.prove(&pk, stdin).expect("failed to generate proof");
-        let (_n, _a, b) =
+        let (_, _, fib_n) =
             PublicValuesTuple::abi_decode(proof.public_values.as_slice(), false).unwrap();
 
-        println!("fib(n): {}", b);
+        println!("fib(n): {}", fib_n);
 
         // Verify the proof.
         client.verify(&proof, &vk).expect("failed to verify proof");
     }
 }
-
-/// The public values encoded as a tuple that can be easily deserialized inside Solidity.
-type PublicValuesTuple = sol! {
-    tuple(uint32, uint32, uint32)
-};
 
 /// A fixture that can be used to test the verification of SP1 zkVM proofs inside Solidity.
 #[derive(Debug, Clone, Serialize, Deserialize)]
