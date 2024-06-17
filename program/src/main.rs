@@ -42,8 +42,4 @@ pub fn main() {
 
     // Commit to the public values of the program.
     sp1_zkvm::io::commit_slice(&bytes);
-
-    // Print out the public values.
-    println!("n: {}", n);
-    println!("fib(n): {}", b);
 }
