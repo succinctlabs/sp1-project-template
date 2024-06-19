@@ -1,6 +1,10 @@
 name: Foundry Test
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
 
 env:
   FOUNDRY_PROFILE: ci
@@ -24,11 +28,13 @@ jobs:
 
       - name: Run Forge build
         run: |
+          cd contracts
           forge --version
           forge build --sizes
         id: build
 
       - name: Run Forge tests
         run: |
+          cd contracts
           forge test -vvv
         id: test
