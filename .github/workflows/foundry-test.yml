@@ -1,4 +1,4 @@
-name: test
+name: Foundry Test
 
 on: workflow_dispatch
 
