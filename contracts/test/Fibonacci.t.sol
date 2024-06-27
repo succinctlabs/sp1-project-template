@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.25;
+pragma solidity ^0.8.20;
 
 import {Test, console} from "forge-std/Test.sol";
 import {stdJson} from "forge-std/StdJson.sol";
 import {Fibonacci} from "../src/Fibonacci.sol";
-import {SP1Verifier} from "@sp1-contracts/SP1Verifier.sol";
+import {SP1VerifierGateway} from "@sp1-contracts/SP1VerifierGateway.sol";
 
 struct SP1ProofFixtureJson {
     uint32 a;
@@ -18,6 +18,7 @@ struct SP1ProofFixtureJson {
 contract FibonacciTest is Test {
     using stdJson for string;
 
+    address verifier;
     Fibonacci public fibonacci;
 
     function loadFixture() public view returns (SP1ProofFixtureJson memory) {
@@ -30,15 +31,17 @@ contract FibonacciTest is Test {
 
     function setUp() public {
         SP1ProofFixtureJson memory fixture = loadFixture();
-        fibonacci = new Fibonacci(fixture.vkey);
+
+        verifier = address(new SP1VerifierGateway(address(1)));
+        fibonacci = new Fibonacci(verifier, fixture.vkey);
     }
 
-    function test_ValidFibonacciProof() public view {
+    function test_ValidFibonacciProof() public {
         SP1ProofFixtureJson memory fixture = loadFixture();
-        (uint32 n, uint32 a, uint32 b) = fibonacci.verifyFibonacciProof(
-            fixture.proof,
-            fixture.publicValues
-        );
+
+        vm.mockCall(verifier, abi.encodeWithSelector(SP1VerifierGateway.verifyProof.selector), abi.encode(true));
+
+        (uint32 n, uint32 a, uint32 b) = fibonacci.verifyFibonacciProof(fixture.proof, fixture.publicValues);
         assert(n == fixture.n);
         assert(a == fixture.a);
         assert(b == fixture.b);
