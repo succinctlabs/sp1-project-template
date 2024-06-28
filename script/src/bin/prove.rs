@@ -57,7 +57,7 @@ fn main() {
         // Generate the proof.
         let proof = client
             .prove_plonk(&pk, stdin)
-            .expect("failed to generate proof");
+            .expect("failed to generate proof for EVM");
         create_plonk_fixture(&proof.proof, &vk);
     } else {
         // Generate the proof.
