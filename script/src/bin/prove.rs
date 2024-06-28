@@ -11,7 +11,7 @@ use std::path::PathBuf;
 use alloy_sol_types::{sol, SolType};
 use clap::Parser;
 use serde::{Deserialize, Serialize};
-use sp1_sdk::{HashableKey, ProverClient, SP1PlonkBn254Proof, SP1Stdin, SP1VerifyingKey};
+use sp1_sdk::{HashableKey, PlonkBn254Proof, ProverClient, SP1Stdin, SP1VerifyingKey};
 
 /// The ELF (executable and linkable format) file for the Succinct RISC-V zkVM.
 ///
@@ -58,7 +58,7 @@ fn main() {
         let proof = client
             .prove_plonk(&pk, stdin)
             .expect("failed to generate proof");
-        create_plonk_fixture(&proof, &vk);
+        create_plonk_fixture(&proof.proof, &vk);
     } else {
         // Generate the proof.
         let proof = client.prove(&pk, stdin).expect("failed to generate proof");
@@ -85,9 +85,10 @@ struct SP1FibonacciProofFixture {
 }
 
 /// Create a fixture for the given proof.
-fn create_plonk_fixture(proof: &SP1PlonkBn254Proof, vk: &SP1VerifyingKey) {
+fn create_plonk_fixture(proof: &PlonkBn254Proof, vk: &SP1VerifyingKey) {
     // Deserialize the public values.
-    let bytes = proof.public_values.as_slice();
+    let binding = proof.public_inputs.clone().concat();
+    let bytes = binding.as_bytes();
     let (n, a, b) = PublicValuesTuple::abi_decode(bytes, false).unwrap();
 
     // Create the testing fixture so we can test things end-ot-end.
@@ -96,8 +97,8 @@ fn create_plonk_fixture(proof: &SP1PlonkBn254Proof, vk: &SP1VerifyingKey) {
         b,
         n,
         vkey: vk.bytes32().to_string(),
-        public_values: proof.public_values.bytes().to_string(),
-        proof: proof.bytes().to_string(),
+        public_values: proof.public_inputs.concat().to_string(),
+        proof: proof.raw_proof.to_string(),
     };
 
     // The verification key is used to verify that the proof corresponds to the execution of the
