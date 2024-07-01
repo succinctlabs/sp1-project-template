@@ -47,7 +47,7 @@ fn main() {
     // Setup the program.
     let (pk, vk) = client.setup(FIBONACCI_ELF);
 
-    // Setup the inputs.;
+    // Setup the inputs.
     let mut stdin = SP1Stdin::new();
     stdin.write(&args.n);
 
@@ -60,10 +60,9 @@ fn main() {
             .plonk()
             .run()
             .expect("failed to generate proof");
-        if let Some(plonk_proof) = extract_plonk_bn254_proof(&proof.proof) {
-            create_plonk_fixture(plonk_proof, &vk);
-        } else {
-            eprintln!("Error: Expected PlonkBn254Proof, but found a different proof type.");
+        match &proof.proof {
+            SP1Proof::Plonk(plonk_proof) => create_plonk_fixture(plonk_proof, &vk),
+            _ => panic!("Error: Expected Plonk Proof, but found a different proof type."),
         }
     } else {
         // Generate the proof.
@@ -79,15 +78,6 @@ fn main() {
 
         // Verify the proof.
         client.verify(&proof, &vk).expect("failed to verify proof");
-    }
-}
-
-// Add this function to extract the PlonkBn254Proof from SP1Proof
-fn extract_plonk_bn254_proof(sp1_proof: &SP1Proof) -> Option<&PlonkBn254Proof> {
-    if let SP1Proof::Plonk(proof) = sp1_proof {
-        Some(proof)
-    } else {
-        None
     }
 }
 
