@@ -1,7 +1,7 @@
 # SP1 Project Template
 
 This is a template for creating an end-to-end [SP1](https://github.com/succinctlabs/sp1) project
-that can generate a proof of any RISC-V program and verify them.
+that can generate a proof of any RISC-V program.
 
 ## Requirements
 
@@ -31,3 +31,13 @@ Generate the proof that is small enough to be verified on-chain and verifiable b
 cd script
 RUST_LOG=info cargo run --bin prove --release -- --evm
 ```
+
+## Using the Prover Network
+
+Make a copy of the example environment file:
+
+```sh
+cp .env.example .env
+```
+
+Then, set the `SP1_PROVER` environment variable to `network` and set the `SP1_PRIVATE_KEY` environment variable to your whitelisted private key. For more information, see the [setup guide](https://docs.succinct.xyz/prover-network/setup.html).
