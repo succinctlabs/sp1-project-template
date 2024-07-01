@@ -3,6 +3,7 @@
 version = "0.1.0"
 name = "fibonacci-script"
 edition = "2021"
+default-run = "prove"
 
 [[bin]]
 name = "prove"
