@@ -31,7 +31,6 @@ contract Fibonacci {
         view
         returns (uint32, uint32, uint32)
     {
-        // this.verifyProof(fibonacciProgramVkey, publicValues, proof);
         ISP1Verifier(verifier).verifyProof(fibonacciProgramVkey, publicValues, proof);
         (uint32 n, uint32 a, uint32 b) = abi.decode(publicValues, (uint32, uint32, uint32));
         return (n, a, b);

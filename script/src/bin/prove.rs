@@ -11,7 +11,7 @@ use std::path::PathBuf;
 use alloy_sol_types::{sol, SolType};
 use clap::Parser;
 use serde::{Deserialize, Serialize};
-use sp1_sdk::{HashableKey, PlonkBn254Proof, ProverClient, SP1Stdin, SP1VerifyingKey};
+use sp1_sdk::{HashableKey, PlonkBn254Proof, ProverClient, SP1Proof, SP1Stdin, SP1VerifyingKey};
 
 /// The ELF (executable and linkable format) file for the Succinct RISC-V zkVM.
 ///
@@ -56,12 +56,22 @@ fn main() {
     if args.evm {
         // Generate the proof.
         let proof = client
-            .prove_plonk(&pk, stdin)
-            .expect("failed to generate proof for EVM");
-        create_plonk_fixture(&proof.proof, &vk);
+            .prove(&pk, stdin)
+            .plonk()
+            .run()
+            .expect("failed to generate proof");
+        if let Some(plonk_proof) = extract_plonk_bn254_proof(&proof.proof) {
+            create_plonk_fixture(plonk_proof, &vk);
+        } else {
+            eprintln!("Error: Expected PlonkBn254Proof, but found a different proof type.");
+        }
     } else {
         // Generate the proof.
-        let proof = client.prove(&pk, stdin).expect("failed to generate proof");
+        let proof = client
+            .prove(&pk, stdin)
+            .core()
+            .run()
+            .expect("failed to generate proof for");
         let (_, _, fib_n) =
             PublicValuesTuple::abi_decode(proof.public_values.as_slice(), false).unwrap();
         println!("Successfully generated proof!");
@@ -69,6 +79,15 @@ fn main() {
 
         // Verify the proof.
         client.verify(&proof, &vk).expect("failed to verify proof");
+    }
+}
+
+// Add this function to extract the PlonkBn254Proof from SP1Proof
+fn extract_plonk_bn254_proof(sp1_proof: &SP1Proof) -> Option<&PlonkBn254Proof> {
+    if let SP1Proof::Plonk(proof) = sp1_proof {
+        Some(proof)
+    } else {
+        None
     }
 }
 
