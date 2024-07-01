@@ -6,7 +6,7 @@ This is a template for writing a contract that uses verification of [SP1](https:
 
 - [Foundry](https://book.getfoundry.sh/getting-started/installation)
 
-## Tests
+## Test
 
 ```sh
 forge test -v
