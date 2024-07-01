@@ -2,7 +2,7 @@
 //!
 //! You can run this script using the following command:
 //! ```shell
-//! cd script
+//! RUST_LOG=info cargo run --package fibonacci-script --bin vkey --release
 //! ```
 
 use sp1_sdk::{HashableKey, ProverClient};
