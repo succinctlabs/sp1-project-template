@@ -124,7 +124,7 @@ fn create_plonk_fixture(proof: &PlonkBn254Proof, vk: &SP1VerifyingKey) {
     // program on the given input.
     //
     // Note that the verification key stays the same regardless of the input.
-    println!("Verification Key: {}", fixture.vkey);
+    println!("Program Verification Key: {}", fixture.vkey);
 
     // The public values are the values whicha are publically commited to by the zkVM.
     //

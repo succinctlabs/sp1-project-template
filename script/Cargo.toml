@@ -8,6 +8,10 @@ edition = "2021"
 name = "prove"
 path = "src/bin/prove.rs"
 
+[[bin]]
+name = "vkey"
+path = "src/bin/vkey.rs"
+
 [dependencies]
 sp1-sdk = { git = "https://github.com/succinctlabs/sp1.git", branch = "dev" }
 serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
