@@ -3,10 +3,15 @@
 version = "0.1.0"
 name = "fibonacci-script"
 edition = "2021"
+default-run = "prove"
 
 [[bin]]
 name = "prove"
 path = "src/bin/prove.rs"
+
+[[bin]]
+name = "vkey"
+path = "src/bin/vkey.rs"
 
 [dependencies]
 sp1-sdk = { git = "https://github.com/succinctlabs/sp1.git", tag = "v1.0.7-testnet" }

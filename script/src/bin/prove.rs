@@ -47,7 +47,7 @@ fn main() {
     // Setup the program.
     let (pk, vk) = client.setup(FIBONACCI_ELF);
 
-    // Setup the inputs.;
+    // Setup the inputs.
     let mut stdin = SP1Stdin::new();
     stdin.write(&args.n);
 
