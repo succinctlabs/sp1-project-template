@@ -1,13 +1,12 @@
 # SP1 Project Template
 
-This is a template for creating an end-to-end [SP1](https://github.com/succinctlabs/sp1) project 
-that can generate a proof of any RISC-V program and verify the proof onchain.
+This is a template for creating an end-to-end [SP1](https://github.com/succinctlabs/sp1) project
+that can generate a proof of any RISC-V program.
 
 ## Requirements
 
 - [Rust](https://rustup.rs/)
 - [SP1](https://succinctlabs.github.io/sp1/getting-started/install.html)
-- [Foundry](https://book.getfoundry.sh/getting-started/installation)
 
 ## Standard Proof Generation
 
@@ -16,7 +15,7 @@ that can generate a proof of any RISC-V program and verify the proof onchain.
 
 Generate the proof for your program using the standard prover.
 
-```
+```sh
 cd script
 RUST_LOG=info cargo run --bin prove --release
 ```
@@ -28,17 +27,17 @@ RUST_LOG=info cargo run --bin prove --release
 
 Generate the proof that is small enough to be verified on-chain and verifiable by the EVM. This command also generates a fixture that can be used to test the verification of SP1 zkVM proofs inside Solidity.
 
-```
+```sh
 cd script
 RUST_LOG=info cargo run --bin prove --release -- --evm
 ```
 
-### Solidity Proof Verification
+## Using the Prover Network
 
-After generating the verify the proof with the SP1 EVM verifier.
+Make a copy of the example environment file:
 
+```sh
+cp .env.example .env
 ```
-cd ../contracts
-forge test -v
-```
 
+Then, set the `SP1_PROVER` environment variable to `network` and set the `SP1_PRIVATE_KEY` environment variable to your whitelisted private key. For more information, see the [setup guide](https://docs.succinct.xyz/prover-network/setup.html).
