@@ -857,9 +857,9 @@ checksum = "57c0d7b74b563b49d38dae00a0c37d4d6de9b432382b2892f0574ddcae73fd0a"
 
 [[package]]
 name = "pest"
-version = "2.7.10"
+version = "2.7.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "560131c633294438da9f7c4b08189194b20946c8274c6b9e38881a7874dc8ee8"
+checksum = "cd53dff83f26735fdc1ca837098ccf133605d794cdae66acfc2bfac3ec809d95"
 dependencies = [
  "memchr",
  "thiserror",
@@ -1246,7 +1246,7 @@ dependencies = [
 [[package]]
 name = "sp1-precompiles"
 version = "0.1.0"
-source = "git+https://github.com/succinctlabs/sp1.git?branch=dev#6cd5df6ba01a6acb243e7a1f87bc89ae233f1630"
+source = "git+https://github.com/succinctlabs/sp1.git?tag=v1.0.7-testnet#b35be4200e7369bd987d8ba101f70dd7dec3df1a"
 dependencies = [
  "anyhow",
  "bincode",
@@ -1263,7 +1263,7 @@ dependencies = [
 [[package]]
 name = "sp1-zkvm"
 version = "0.1.0"
-source = "git+https://github.com/succinctlabs/sp1.git?branch=dev#6cd5df6ba01a6acb243e7a1f87bc89ae233f1630"
+source = "git+https://github.com/succinctlabs/sp1.git?tag=v1.0.7-testnet#b35be4200e7369bd987d8ba101f70dd7dec3df1a"
 dependencies = [
  "bincode",
  "cfg-if",
