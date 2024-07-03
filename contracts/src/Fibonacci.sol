@@ -16,22 +16,22 @@ contract Fibonacci {
     address public verifier;
 
     /// @notice The verification key for the fibonacci program.
-    bytes32 public fibonacciProgramVkey;
+    bytes32 public fibonacciProgramVKey;
 
-    constructor(address _verifier, bytes32 _fibonacciProgramVkey) {
+    constructor(address _verifier, bytes32 _fibonacciProgramVKey) {
         verifier = _verifier;
-        fibonacciProgramVkey = _fibonacciProgramVkey;
+        fibonacciProgramVKey = _fibonacciProgramVKey;
     }
 
     /// @notice The entrypoint for verifying the proof of a fibonacci number.
-    /// @param proof The encoded proof.
+    /// @param proofBytes The encoded proof.
     /// @param publicValues The encoded public values.
-    function verifyFibonacciProof(bytes calldata proof, bytes calldata publicValues)
+    function verifyFibonacciProof(bytes calldata publicValues, bytes calldata proofBytes)
         public
         view
         returns (uint32, uint32, uint32)
     {
-        ISP1Verifier(verifier).verifyProof(fibonacciProgramVkey, publicValues, proof);
+        ISP1Verifier(verifier).verifyProof(fibonacciProgramVKey, publicValues, proofBytes);
         (uint32 n, uint32 a, uint32 b) = abi.decode(publicValues, (uint32, uint32, uint32));
         return (n, a, b);
     }
