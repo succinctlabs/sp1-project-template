@@ -20,6 +20,8 @@ serde = { version = "1.0", default-features = false, features = ["derive"] }
 clap = { version = "4.0", features = ["derive", "env"] }
 tracing = "0.1.40"
 alloy-sol-types = "0.7.2"
+hex = "0.4.3"
 
 [build-dependencies]
+sp1-sdk = "1.0.0-rc.1"
 sp1-helper = "1.0.0-rc.1"
