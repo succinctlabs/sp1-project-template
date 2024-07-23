@@ -102,8 +102,8 @@ fn create_plonk_fixture(proof: &SP1ProofWithPublicValues, vk: &SP1VerifyingKey) 
         b,
         n,
         vkey: vk.bytes32().to_string(),
-        public_values: hex::encode(bytes),
-        proof: hex::encode(proof.bytes()),
+        public_values: format!("0x{}", hex::encode(bytes)),
+        proof: format!("0x{}", hex::encode(proof.bytes())),
     };
 
     // The verification key is used to verify that the proof corresponds to the execution of the
