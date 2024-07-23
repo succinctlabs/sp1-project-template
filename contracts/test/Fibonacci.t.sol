@@ -41,7 +41,7 @@ contract FibonacciTest is Test {
 
         vm.mockCall(verifier, abi.encodeWithSelector(SP1VerifierGateway.verifyProof.selector), abi.encode(true));
 
-        (uint32 n, uint32 a, uint32 b) = fibonacci.verifyFibonacciProof(fixture.proof, fixture.publicValues);
+        (uint32 n, uint32 a, uint32 b) = fibonacci.verifyFibonacciProof(fixture.publicValues, fixture.proof);
         assert(n == fixture.n);
         assert(a == fixture.a);
         assert(b == fixture.b);
@@ -53,6 +53,6 @@ contract FibonacciTest is Test {
         // Create a fake proof.
         bytes memory fakeProof = new bytes(fixture.proof.length);
 
-        fibonacci.verifyFibonacciProof(fakeProof, fixture.publicValues);
+        fibonacci.verifyFibonacciProof(fixture.publicValues, fakeProof);
     }
 }
