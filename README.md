@@ -33,7 +33,7 @@ cd script
 cargo run --release -- --prove
 ```
 
-### Generate an EVM-Compatible (PLONK)Proof
+### Generate an EVM-Compatible (PLONK) Proof
 
 > [!WARNING]
 > You will need at least 128GB RAM to generate the PLONK proof.
