@@ -4258,11 +4258,12 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.120"
+version = "1.0.122"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4e0d21c9a8cae1235ad58a00c11cb40d4b1e5c784f1ef2c537876ed6ffd8b7c5"
+checksum = "784b6203951c57ff748476b126ccb5e8e2959a5c19e5c617ab1956be3dbc68da"
 dependencies = [
  "itoa",
+ "memchr",
  "ryu",
  "serde",
 ]
@@ -4473,20 +4474,21 @@ dependencies = [
 
 [[package]]
 name = "sp1-build"
-version = "1.0.1"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "63f0edef8848ee5e5e4f2b5891ddd93e644fed394b64d2de3c97deedfb178d8f"
+checksum = "260c285956e8205d332c9a5acbd828462399b04caf72d0620718a20447bac91d"
 dependencies = [
  "anyhow",
  "cargo_metadata",
  "clap",
+ "dirs",
 ]
 
 [[package]]
 name = "sp1-core"
-version = "1.0.1"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5d0fb585eb8a6d9fbec006278e4ba8aa1af9dbae655944a8635eaee0424cafd2"
+checksum = "2e916b2084e5de5e45c1dc3244dc212af9c8334dda3246acde7fc6e5ab4a7fc1"
 dependencies = [
  "anyhow",
  "arrayref",
@@ -4533,6 +4535,7 @@ dependencies = [
  "snowbridge-amcl",
  "sp1-derive",
  "sp1-primitives",
+ "static_assertions",
  "strum",
  "strum_macros",
  "tempfile",
@@ -4546,9 +4549,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-derive"
-version = "1.0.1"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6e0ac64c524b9f79073622218698103585a46209d343ef1cba6f8dac73e35bb8"
+checksum = "8dbc1d9a05a0e83f548907d50539e5e59873bbf6a82793ce87a195345ca7ddf9"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -4557,9 +4560,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-helper"
-version = "1.0.1"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "721a60f0ebfac764fd68edfcb3cbe44d4c2fad71a110701306428968a3596cd2"
+checksum = "71dce2545791b5c0c2e65f81eb76d74d51804cbbe758643978dc0bbcdbbaa127"
 dependencies = [
  "cargo_metadata",
  "chrono",
@@ -4568,9 +4571,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-primitives"
-version = "1.0.1"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9bb8d5ca92c185781e3b91d333217f1204a8ab0e9e8327641245c5fb685b168a"
+checksum = "cb04c7a047b000dbab6b6e143f10e79a2cc5294d98fed74dc5dc11d374cef297"
 dependencies = [
  "itertools 0.13.0",
  "lazy_static",
@@ -4582,9 +4585,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-prover"
-version = "1.0.1"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eaf125b5df27e81706b79de5a4ee3ef587a4a504ab799a1b1b774b537d1a1820"
+checksum = "906ed35cdb4d24050b1d00aa51abfdb986883c5280ca6b34b1cd50e673cfad02"
 dependencies = [
  "anyhow",
  "bincode",
@@ -4599,6 +4602,7 @@ dependencies = [
  "p3-challenger",
  "p3-commit",
  "p3-field",
+ "p3-matrix",
  "rayon",
  "serde",
  "serde_json",
@@ -4619,9 +4623,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-recursion-circuit"
-version = "1.0.1"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "53af2e0dc0c9455896db5c014266391b515fe17f33141acb1ba194585bae4973"
+checksum = "95a620b1c84ea7776deebf9eed2a5310c040f1b5b1db0709a2b36b86516f743d"
 dependencies = [
  "bincode",
  "itertools 0.13.0",
@@ -4643,9 +4647,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-recursion-compiler"
-version = "1.0.1"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a85ad294534013954b975e0516eedd13722406291ddaaa064feee48441920251"
+checksum = "cb5ef5565d25bf41f00280f0e09ab27cd39b8c8986af12c083e85a4061a49621"
 dependencies = [
  "backtrace",
  "itertools 0.13.0",
@@ -4669,9 +4673,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-recursion-core"
-version = "1.0.1"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4ead6647708c6d931b0069b3823f36e57232dc627dddc21c82775e3e78cdd395"
+checksum = "5785177a892714601fd2f3e5e79af43d222bdedc415fb7cbdd52c9b1ee4dc3e2"
 dependencies = [
  "arrayref",
  "backtrace",
@@ -4705,9 +4709,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-recursion-derive"
-version = "1.0.1"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "42289ce113de57cb1f2b163688021ce7bdbe2c6cdbc96d5e2b1c85b1108c4199"
+checksum = "f5970fa689c5b3e41d2ea4a81f9207594b9befc2ba5ad9d8727b6bdbc7ba054e"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -4716,9 +4720,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-recursion-gnark-ffi"
-version = "1.0.1"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "76b9c84925c075eac095deac8f2ab48258be35a662339e386d76ac5b21c60bdc"
+checksum = "6aacdfec9e2895f0166125b89f3f058a25cdbbdce300839a46b240d3bafbac13"
 dependencies = [
  "anyhow",
  "bincode",
@@ -4742,9 +4746,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-recursion-program"
-version = "1.0.1"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d460db3d03dd185e4d338c4c6d1b3fd174063f561219f98abc26532eecdc6ad2"
+checksum = "40b570d8e40b8faad877e7c8604de8bc51f61dbee8ee7e0efe3ae7610585e69c"
 dependencies = [
  "itertools 0.13.0",
  "p3-air",
@@ -4772,9 +4776,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-sdk"
-version = "1.0.1"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d491b27caebd3f331dcb3ce1186bb37970a1e78440ecd34fd3ab74b108af23a"
+checksum = "6924c2ba6d0a522b17f29368f6db8ebd1bf2a424eb4d6e67308f1be4df9d860c"
 dependencies = [
  "alloy-sol-types",
  "anyhow",
@@ -5087,9 +5091,9 @@ checksum = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
 
 [[package]]
 name = "tokio"
-version = "1.39.1"
+version = "1.39.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d040ac2b29ab03b09d4129c2f5bbd012a3ac2f79d38ff506a4bf8dd34b0eac8a"
+checksum = "daa4fb1bc778bd6f04cbfc4bb2d06a7396a8f299dc33ea1900cedaa316f467b1"
 dependencies = [
  "backtrace",
  "bytes",
