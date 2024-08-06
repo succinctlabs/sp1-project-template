@@ -6,14 +6,15 @@
 //! RUST_LOG=info cargo run --release --bin evm
 //! ```
 
-use alloy_sol_types::{sol, SolType};
+use alloy_sol_types::SolType;
 use clap::Parser;
+use fibonacci_lib::PublicValuesStruct;
 use serde::{Deserialize, Serialize};
 use sp1_sdk::{HashableKey, ProverClient, SP1ProofWithPublicValues, SP1Stdin, SP1VerifyingKey};
 use std::path::PathBuf;
 
 /// The ELF (executable and linkable format) file for the Succinct RISC-V zkVM.
-pub const FIBONACCI_ELF: &[u8] = include_bytes!("../../../program/elf/riscv32im-succinct-zkvm-elf");
+pub const FIBONACCI_ELF: &[u8] = include_bytes!("../../../elf/riscv32im-succinct-zkvm-elf");
 
 /// The arguments for the EVM command.
 #[derive(Parser, Debug)]
@@ -22,11 +23,6 @@ struct EVMArgs {
     #[clap(long, default_value = "20")]
     n: u32,
 }
-
-/// The public values encoded as a tuple that can be easily deserialized inside Solidity.
-type PublicValuesTuple = sol! {
-    tuple(uint32, uint32, uint32)
-};
 
 /// A fixture that can be used to test the verification of SP1 zkVM proofs inside Solidity.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -73,7 +69,7 @@ fn main() {
 fn create_plonk_fixture(proof: &SP1ProofWithPublicValues, vk: &SP1VerifyingKey) {
     // Deserialize the public values.
     let bytes = proof.public_values.as_slice();
-    let (n, a, b) = PublicValuesTuple::abi_decode(bytes, false).unwrap();
+    let PublicValuesStruct { n, a, b } = PublicValuesStruct::abi_decode(bytes, false).unwrap();
 
     // Create the testing fixture so we can test things end-to-end.
     let fixture = SP1FibonacciProofFixture {
@@ -91,7 +87,7 @@ fn create_plonk_fixture(proof: &SP1ProofWithPublicValues, vk: &SP1VerifyingKey) 
     // Note that the verification key stays the same regardless of the input.
     println!("Verification Key: {}", fixture.vkey);
 
-    // The public values are the values whicha are publically commited to by the zkVM.
+    // The public values are the values which are publically commited to by the zkVM.
     //
     // If you need to expose the inputs or outputs of your program, you should commit them in
     // the public values.
