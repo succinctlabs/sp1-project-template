@@ -3,6 +3,12 @@ pragma solidity ^0.8.20;
 
 import {ISP1Verifier} from "@sp1-contracts/ISP1Verifier.sol";
 
+struct PublicValuesStruct {
+    uint32 n;
+    uint32 a;
+    uint32 b;
+}
+
 /// @title Fibonacci.
 /// @author Succinct Labs
 /// @notice This contract implements a simple example of verifying the proof of a computing a
@@ -32,7 +38,7 @@ contract Fibonacci {
         returns (uint32, uint32, uint32)
     {
         ISP1Verifier(verifier).verifyProof(fibonacciProgramVKey, _publicValues, _proofBytes);
-        (uint32 n, uint32 a, uint32 b) = abi.decode(_publicValues, (uint32, uint32, uint32));
-        return (n, a, b);
+        PublicValuesStruct memory publicValues = abi.decode(_publicValues, (PublicValuesStruct));
+        return (publicValues.n, publicValues.a, publicValues.b);
     }
 }
