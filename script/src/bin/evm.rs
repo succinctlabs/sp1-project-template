@@ -1,3 +1,11 @@
+//! An end-to-end example of using the SP1 SDK to generate a proof of a program that can have an
+//! EVM-Compatible proof generated which can be verified on-chain.
+//!
+//! You can run this script using the following command:
+//! ```shell
+//! RUST_LOG=info cargo run --release --bin evm
+//! ```
+
 use alloy_sol_types::{sol, SolType};
 use clap::Parser;
 use serde::{Deserialize, Serialize};
@@ -77,9 +85,20 @@ fn create_plonk_fixture(proof: &SP1ProofWithPublicValues, vk: &SP1VerifyingKey) 
         proof: format!("0x{}", hex::encode(proof.bytes())),
     };
 
-    // Print fixture information
+    // The verification key is used to verify that the proof corresponds to the execution of the
+    // program on the given input.
+    //
+    // Note that the verification key stays the same regardless of the input.
     println!("Verification Key: {}", fixture.vkey);
+
+    // The public values are the values whicha are publically commited to by the zkVM.
+    //
+    // If you need to expose the inputs or outputs of your program, you should commit them in
+    // the public values.
     println!("Public Values: {}", fixture.public_values);
+
+    // The proof proves to the verifier that the program was executed with some inputs that led to
+    // the give public values.
     println!("Proof Bytes: {}", fixture.proof);
 
     // Save the fixture to a file.
