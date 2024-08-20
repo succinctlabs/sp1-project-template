@@ -17,7 +17,7 @@ name = "vkey"
 path = "src/bin/vkey.rs"
 
 [dependencies]
-sp1-sdk = "1.1.0"
+sp1-sdk = { git = "https://github.com/succinctlabs/sp1.git", rev="295c6c849a9d421084b51e1f97acea2310e3566c" }
 serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
 serde = { version = "1.0", default-features = false, features = ["derive"] }
 clap = { version = "4.0", features = ["derive", "env"] }
@@ -27,4 +27,4 @@ alloy-sol-types = { workspace = true }
 fibonacci-lib = { path = "../lib" }
 
 [build-dependencies]
-sp1-helper = "1.1.0"
+sp1-helper = { git = "https://github.com/succinctlabs/sp1.git", rev="295c6c849a9d421084b51e1f97acea2310e3566c" }

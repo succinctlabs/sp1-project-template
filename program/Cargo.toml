@@ -5,5 +5,5 @@ edition = "2021"
 
 [dependencies]
 alloy-sol-types = { workspace = true }
-sp1-zkvm = "1.1.0"
+sp1-zkvm = { git = "https://github.com/succinctlabs/sp1.git", rev="295c6c849a9d421084b51e1f97acea2310e3566c" }
 fibonacci-lib = { path = "../lib" }
