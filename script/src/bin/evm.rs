@@ -47,7 +47,7 @@ struct SP1FibonacciProofFixture {
     vkey: String,
     public_values: String,
     proof: String,
-    proof_system: String,
+    system: String,
 }
 
 fn main() {
@@ -98,7 +98,7 @@ fn create_proof_fixture(
         vkey: vk.bytes32().to_string(),
         public_values: format!("0x{}", hex::encode(bytes)),
         proof: format!("0x{}", hex::encode(proof.bytes())),
-        proof_system: format!("{:?}", system),
+        system: format!("{:?}", system),
     };
 
     // The verification key is used to verify that the proof corresponds to the execution of the
@@ -116,9 +116,6 @@ fn create_proof_fixture(
     // The proof proves to the verifier that the program was executed with some inputs that led to
     // the give public values.
     println!("Proof Bytes: {}", fixture.proof);
-
-    // Print the proof system used
-    println!("Proof System: {}", fixture.proof_system);
 
     // Save the fixture to a file.
     let fixture_path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../contracts/src/fixtures");
