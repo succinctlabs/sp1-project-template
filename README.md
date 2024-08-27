@@ -10,8 +10,17 @@ that can generate a proof of any RISC-V program.
 
 ## Running the Project
 
-There are three main ways to run this project: execute a program, generate a core proof, and
+There are four main ways to run this project: build a program, execute a program, generate a core proof, and
 generate an EVM-compatible proof.
+
+### Build the Program
+
+To build the program, run the following command:
+
+```sh
+cd program
+cargo prove build
+```
 
 ### Execute the Program
 
@@ -53,7 +62,7 @@ inside Solidity.
 To retrieve your `programVKey` for your on-chain contract, run the following command:
 
 ```sh
-cargo run --release --bin vkey
+cargo prove vkey --elf elf/riscv32im-succinct-zkvm-elf
 ```
 
 ## Using the Prover Network
