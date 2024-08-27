@@ -12,10 +12,6 @@ path = "src/bin/main.rs"
 name = "evm"
 path = "src/bin/evm.rs"
 
-[[bin]]
-name = "vkey"
-path = "src/bin/vkey.rs"
-
 [dependencies]
 sp1-sdk = "1.2.0"
 serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
