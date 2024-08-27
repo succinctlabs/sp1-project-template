@@ -13,7 +13,6 @@ struct SP1ProofFixtureJson {
     bytes proof;
     bytes publicValues;
     bytes32 vkey;
-    string proofSystem;
 }
 
 contract FibonacciTest is Test {
