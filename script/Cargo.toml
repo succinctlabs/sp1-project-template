@@ -13,7 +13,7 @@ name = "evm"
 path = "src/bin/evm.rs"
 
 [dependencies]
-sp1-sdk = { git = "https://github.com/succinctlabs/sp1.git", branch = "v1.3.0-rc3" }
+sp1-sdk = { git = "https://github.com/succinctlabs/sp1.git", rev = "80cd5008a096de7b524f583bc15a044afb8826de" }
 serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
 serde = { version = "1.0", default-features = false, features = ["derive"] }
 clap = { version = "4.0", features = ["derive", "env"] }
@@ -23,4 +23,4 @@ alloy-sol-types = { workspace = true }
 fibonacci-lib = { path = "../lib" }
 
 [build-dependencies]
-sp1-helper = { git = "https://github.com/succinctlabs/sp1.git", branch = "v1.3.0-rc3" }
+sp1-helper = { git = "https://github.com/succinctlabs/sp1.git", rev = "80cd5008a096de7b524f583bc15a044afb8826de" }
