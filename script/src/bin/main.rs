@@ -79,6 +79,7 @@ fn main() {
         // Generate the proof
         let proof = client
             .prove(&pk, stdin)
+            .compressed()
             .run()
             .expect("failed to generate proof");
 
