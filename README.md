@@ -6,21 +6,12 @@ that can generate a proof of any RISC-V program.
 ## Requirements
 
 - [Rust](https://rustup.rs/)
-- [SP1](https://docs.succinct.xyz/getting-started/install.html)
+- [SP1](https://succinctlabs.github.io/sp1/getting-started/install.html)
 
 ## Running the Project
 
-There are four main ways to run this project: build a program, execute a program, generate a core proof, and
+There are three main ways to run this project: execute a program, generate a core proof, and
 generate an EVM-compatible proof.
-
-### Build the Program
-
-To build the program, run the following command:
-
-```sh
-cd program
-cargo prove build
-```
 
 ### Execute the Program
 
@@ -42,25 +33,19 @@ cd script
 cargo run --release -- --prove
 ```
 
-### Generate an EVM-Compatible Proof
+### Generate an EVM-Compatible (PLONK) Proof
 
 > [!WARNING]
-> You will need at least 128GB RAM to generate a PLONK or Groth16 proof.
+> You will need at least 128GB RAM to generate the PLONK proof.
 
-To generate a proof that is small enough to be verified on-chain and verifiable by the EVM:
+To generate a PLONK proof that is small enough to be verified on-chain and verifiable by the EVM:
 
 ```sh
 cd script
-cargo run --release --bin evm -- --system plonk
+cargo run --release --bin evm
 ```
 
-this will generate a PLONK proof. If you want to generate a Groth16 proof, run the following command:
-
-```sh
-cargo run --release --bin evm -- --system groth16
-```
-
-These commands will also generate fixtures that can be used to test the verification of SP1 zkVM proofs
+This command also generates a fixture that can be used to test the verification of SP1 zkVM proofs
 inside Solidity.
 
 ### Retrieve the Verification Key
@@ -68,7 +53,7 @@ inside Solidity.
 To retrieve your `programVKey` for your on-chain contract, run the following command:
 
 ```sh
-cargo prove vkey --elf elf/riscv32im-succinct-zkvm-elf
+cargo run --release --bin vkey
 ```
 
 ## Using the Prover Network
