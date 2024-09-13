@@ -58,7 +58,7 @@ cargo run --release --bin vkey
 
 ## Using the Prover Network
 
-We highly recommend using the Succinct prover network for any non-trivial programs or benchmarking purposes. For more information, see the [setup guide](https://docs.succinct.xyz/prover-network/setup.html).
+We highly recommend using the Succinct prover network for any non-trivial programs or benchmarking purposes. For more information, see the [setup guide](https://docs.succinct.xyz/generating-proofs/prover-network.html).
 
 To get started, copy the example environment file:
 
