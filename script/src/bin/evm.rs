@@ -3,11 +3,11 @@
 //!
 //! You can run this script using the following command:
 //! ```shell
-//! RUST_LOG=info cargo run --release --bin evm -- --system plonk
+//! RUST_LOG=info cargo run --release --bin evm -- --system groth16
 //! ```
 //! or
 //! ```shell
-//! RUST_LOG=info cargo run --release --bin evm -- --system groth16
+//! RUST_LOG=info cargo run --release --bin evm -- --system plonk
 //! ```
 
 use alloy_sol_types::SolType;
