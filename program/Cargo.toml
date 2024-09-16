@@ -5,5 +5,5 @@ edition = "2021"
 
 [dependencies]
 alloy-sol-types = { workspace = true }
-sp1-sdk = "2.0.0"
+sp1-zkvm = "2.0.0"
 fibonacci-lib = { path = "../lib" }
