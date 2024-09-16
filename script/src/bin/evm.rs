@@ -26,7 +26,7 @@ pub const FIBONACCI_ELF: &[u8] = include_bytes!("../../../elf/riscv32im-succinct
 struct EVMArgs {
     #[clap(long, default_value = "20")]
     n: u32,
-    #[clap(long, value_enum, default_value = "plonk")]
+    #[clap(long, value_enum, default_value = "groth16")]
     system: ProofSystem,
 }
 

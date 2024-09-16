@@ -45,19 +45,19 @@ cargo run --release -- --prove
 ### Generate an EVM-Compatible Proof
 
 > [!WARNING]
-> You will need at least 128GB RAM to generate a PLONK or Groth16 proof.
+> You will need at least 128GB RAM to generate a Groth16 or PLONK proof.
 
 To generate a proof that is small enough to be verified on-chain and verifiable by the EVM:
 
 ```sh
 cd script
-cargo run --release --bin evm -- --system plonk
+cargo run --release --bin evm -- --system groth16
 ```
 
-this will generate a PLONK proof. If you want to generate a Groth16 proof, run the following command:
+this will generate a Groth16 proof. If you want to generate a PLONK proof, run the following command:
 
 ```sh
-cargo run --release --bin evm -- --system groth16
+cargo run --release --bin evm -- --system plonk
 ```
 
 These commands will also generate fixtures that can be used to test the verification of SP1 zkVM proofs
