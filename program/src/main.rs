@@ -5,7 +5,9 @@
 //
 // Under the hood, we wrap your main function with some extra code so that it behaves properly
 // inside the zkVM.
-#![no_main]
+#![cfg_attr(target_os = "zkvm", no_main)]
+
+#[cfg(target_os = "zkvm")]
 sp1_zkvm::entrypoint!(main);
 
 use alloy_sol_types::SolType;
