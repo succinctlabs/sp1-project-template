@@ -23,7 +23,7 @@ contract FibonacciTest is Test {
 
     function loadFixture() public view returns (SP1ProofFixtureJson memory) {
         string memory root = vm.projectRoot();
-        string memory path = string.concat(root, "/src/fixtures/fixture.json");
+        string memory path = string.concat(root, "/src/fixtures/plonk-fixture.json");
         string memory json = vm.readFile(path);
         bytes memory jsonBytes = json.parseRaw(".");
         return abi.decode(jsonBytes, (SP1ProofFixtureJson));

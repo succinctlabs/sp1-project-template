@@ -3,11 +3,15 @@
 //!
 //! You can run this script using the following command:
 //! ```shell
-//! RUST_LOG=info cargo run --release --bin evm
+//! RUST_LOG=info cargo run --release --bin evm -- --system groth16
+//! ```
+//! or
+//! ```shell
+//! RUST_LOG=info cargo run --release --bin evm -- --system plonk
 //! ```
 
 use alloy_sol_types::SolType;
-use clap::Parser;
+use clap::{Parser, ValueEnum};
 use fibonacci_lib::PublicValuesStruct;
 use serde::{Deserialize, Serialize};
 use sp1_sdk::{HashableKey, ProverClient, SP1ProofWithPublicValues, SP1Stdin, SP1VerifyingKey};
@@ -22,6 +26,15 @@ pub const FIBONACCI_ELF: &[u8] = include_bytes!("../../../elf/riscv32im-succinct
 struct EVMArgs {
     #[clap(long, default_value = "20")]
     n: u32,
+    #[clap(long, value_enum, default_value = "groth16")]
+    system: ProofSystem,
+}
+
+/// Enum representing the available proof systems
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum, Debug)]
+enum ProofSystem {
+    Plonk,
+    Groth16,
 }
 
 /// A fixture that can be used to test the verification of SP1 zkVM proofs inside Solidity.
@@ -54,19 +67,24 @@ fn main() {
     stdin.write(&args.n);
 
     println!("n: {}", args.n);
+    println!("Proof System: {:?}", args.system);
 
-    // Generate the proof.
-    let proof = client
-        .prove(&pk, stdin)
-        .plonk()
-        .run()
-        .expect("failed to generate proof");
+    // Generate the proof based on the selected proof system.
+    let proof = match args.system {
+        ProofSystem::Plonk => client.prove(&pk, stdin).plonk().run(),
+        ProofSystem::Groth16 => client.prove(&pk, stdin).groth16().run(),
+    }
+    .expect("failed to generate proof");
 
-    create_plonk_fixture(&proof, &vk);
+    create_proof_fixture(&proof, &vk, args.system);
 }
 
 /// Create a fixture for the given proof.
-fn create_plonk_fixture(proof: &SP1ProofWithPublicValues, vk: &SP1VerifyingKey) {
+fn create_proof_fixture(
+    proof: &SP1ProofWithPublicValues,
+    vk: &SP1VerifyingKey,
+    system: ProofSystem,
+) {
     // Deserialize the public values.
     let bytes = proof.public_values.as_slice();
     let PublicValuesStruct { n, a, b } = PublicValuesStruct::abi_decode(bytes, false).unwrap();
@@ -101,7 +119,7 @@ fn create_plonk_fixture(proof: &SP1ProofWithPublicValues, vk: &SP1VerifyingKey) 
     let fixture_path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../contracts/src/fixtures");
     std::fs::create_dir_all(&fixture_path).expect("failed to create fixture path");
     std::fs::write(
-        fixture_path.join("fixture.json"),
+        fixture_path.join(format!("{:?}-fixture.json", system).to_lowercase()),
         serde_json::to_string_pretty(&fixture).unwrap(),
     )
     .expect("failed to write fixture");

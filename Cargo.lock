@@ -1092,6 +1092,84 @@ dependencies = [
 ]
 
 [[package]]
+name = "dashu"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "85b3e5ac1e23ff1995ef05b912e2b012a8784506987a2651552db2c73fb3d7e0"
+dependencies = [
+ "dashu-base",
+ "dashu-float",
+ "dashu-int",
+ "dashu-macros",
+ "dashu-ratio",
+ "rustversion",
+]
+
+[[package]]
+name = "dashu-base"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c0b80bf6b85aa68c58ffea2ddb040109943049ce3fbdf4385d0380aef08ef289"
+
+[[package]]
+name = "dashu-float"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "85078445a8dbd2e1bd21f04a816f352db8d333643f0c9b78ca7c3d1df71063e7"
+dependencies = [
+ "dashu-base",
+ "dashu-int",
+ "num-modular",
+ "num-order",
+ "rustversion",
+ "static_assertions",
+]
+
+[[package]]
+name = "dashu-int"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ee99d08031ca34a4d044efbbb21dff9b8c54bb9d8c82a189187c0651ffdb9fbf"
+dependencies = [
+ "cfg-if",
+ "dashu-base",
+ "num-modular",
+ "num-order",
+ "rustversion",
+ "static_assertions",
+]
+
+[[package]]
+name = "dashu-macros"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "93381c3ef6366766f6e9ed9cf09e4ef9dec69499baf04f0c60e70d653cf0ab10"
+dependencies = [
+ "dashu-base",
+ "dashu-float",
+ "dashu-int",
+ "dashu-ratio",
+ "paste",
+ "proc-macro2",
+ "quote",
+ "rustversion",
+]
+
+[[package]]
+name = "dashu-ratio"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "47e33b04dd7ce1ccf8a02a69d3419e354f2bbfdf4eb911a0b7465487248764c9"
+dependencies = [
+ "dashu-base",
+ "dashu-float",
+ "dashu-int",
+ "num-modular",
+ "num-order",
+ "rustversion",
+]
+
+[[package]]
 name = "der"
 version = "0.7.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1271,6 +1349,27 @@ dependencies = [
  "serde",
  "sha3",
  "zeroize",
+]
+
+[[package]]
+name = "enum-map"
+version = "2.7.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6866f3bfdf8207509a033af1a75a7b08abda06bbaaeae6669323fd5a097df2e9"
+dependencies = [
+ "enum-map-derive",
+ "serde",
+]
+
+[[package]]
+name = "enum-map-derive"
+version = "0.17.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f282cfdfe92516eb26c2af8589c274c7c17681f5ecc03c18255fe741c6aa64eb"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.72",
 ]
 
 [[package]]
@@ -1857,8 +1956,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c4567c8db10ae91089c99af84c68c38da3ec2f087c3f82960bcdbf3656b6f4d7"
 dependencies = [
  "cfg-if",
+ "js-sys",
  "libc",
  "wasi",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -2750,6 +2851,21 @@ dependencies = [
  "autocfg",
  "num-integer",
  "num-traits",
+]
+
+[[package]]
+name = "num-modular"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "17bb261bf36fa7d83f4c294f834e91256769097b3cb505d44831e0a179ac647f"
+
+[[package]]
+name = "num-order"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "537b596b97c40fcf8056d153049eb22f481c17ebce72a513ec9286e4986d1bb6"
+dependencies = [
+ "num-modular",
 ]
 
 [[package]]
@@ -4266,18 +4382,18 @@ checksum = "cd0b0ec5f1c1ca621c432a25813d8d60c88abe6d3e08a3eb9cf37d97a0fe3d73"
 
 [[package]]
 name = "serde"
-version = "1.0.204"
+version = "1.0.210"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bc76f558e0cbb2a839d37354c575f1dc3fdc6546b5be373ba43d95f231bf7c12"
+checksum = "c8e3592472072e6e22e0a54d5904d9febf8508f65fb8552499a1abc7d1078c3a"
 dependencies = [
  "serde_derive",
 ]
 
 [[package]]
 name = "serde_derive"
-version = "1.0.204"
+version = "1.0.210"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e0cd7e117be63d3c3678776753929474f3b04a43a080c744d6b0ae2a8c28e222"
+checksum = "243902eda00fad750862fc144cea25caca5e20d615af0a81bee94ca738f1df1f"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -4502,21 +4618,60 @@ dependencies = [
 
 [[package]]
 name = "sp1-build"
-version = "1.1.0"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "260c285956e8205d332c9a5acbd828462399b04caf72d0620718a20447bac91d"
+checksum = "8216e07a9c463c6ee091cdc817cfc10c25446cfd4d020812818177e0a3d1c943"
 dependencies = [
  "anyhow",
  "cargo_metadata",
+ "chrono",
  "clap",
  "dirs",
 ]
 
 [[package]]
-name = "sp1-core"
-version = "1.1.0"
+name = "sp1-core-executor"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2e916b2084e5de5e45c1dc3244dc212af9c8334dda3246acde7fc6e5ab4a7fc1"
+checksum = "9855631556145c827f959527a2f60cb2c6ededfb42afcee49e41dab5f507ce7b"
+dependencies = [
+ "bincode",
+ "bytemuck",
+ "elf",
+ "enum-map",
+ "eyre",
+ "generic-array 1.1.0",
+ "hashbrown 0.14.5",
+ "hex",
+ "itertools 0.13.0",
+ "log",
+ "nohash-hasher",
+ "num",
+ "p3-field",
+ "p3-keccak-air",
+ "p3-maybe-rayon",
+ "rand",
+ "rrs-succinct",
+ "serde",
+ "serde_with",
+ "sp1-curves",
+ "sp1-derive",
+ "sp1-primitives",
+ "sp1-stark",
+ "strum",
+ "strum_macros",
+ "thiserror",
+ "tiny-keccak",
+ "tracing",
+ "typenum",
+ "vec_map",
+]
+
+[[package]]
+name = "sp1-core-machine"
+version = "2.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c7d9c51416ef52b258fa637538c02a2ac06ecaeec79d075c620013a77f035dee"
 dependencies = [
  "anyhow",
  "arrayref",
@@ -4561,8 +4716,11 @@ dependencies = [
  "serde_with",
  "size",
  "snowbridge-amcl",
+ "sp1-core-executor",
+ "sp1-curves",
  "sp1-derive",
  "sp1-primitives",
+ "sp1-stark",
  "static_assertions",
  "strum",
  "strum_macros",
@@ -4576,10 +4734,31 @@ dependencies = [
 ]
 
 [[package]]
-name = "sp1-derive"
-version = "1.1.0"
+name = "sp1-curves"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8dbc1d9a05a0e83f548907d50539e5e59873bbf6a82793ce87a195345ca7ddf9"
+checksum = "d7c33d4d3f5e3590cc8c8d8a3d074097020bc0be0b9dd35fe43e04c586440c85"
+dependencies = [
+ "curve25519-dalek",
+ "dashu",
+ "elliptic-curve",
+ "generic-array 1.1.0",
+ "itertools 0.13.0",
+ "k256",
+ "num",
+ "p3-field",
+ "serde",
+ "snowbridge-amcl",
+ "sp1-primitives",
+ "sp1-stark",
+ "typenum",
+]
+
+[[package]]
+name = "sp1-derive"
+version = "2.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3e33825340e1b21b37a29f5304fbd18a1c7c97ba1376fa35b7c017fd95dd627e"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -4588,32 +4767,32 @@ dependencies = [
 
 [[package]]
 name = "sp1-helper"
-version = "1.1.0"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "71dce2545791b5c0c2e65f81eb76d74d51804cbbe758643978dc0bbcdbbaa127"
+checksum = "7f08124c62d09764810783355cff518477e3f36c8e83343623859afeca6f3eeb"
 dependencies = [
- "cargo_metadata",
- "chrono",
  "sp1-build",
 ]
 
 [[package]]
 name = "sp1-lib"
-version = "1.1.0"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "de4c2cc40e1019faac8cdbe61172c7be09960cfe240c712be46df3795c53fce8"
+checksum = "413956de14568d7fb462213b9505ad4607d75c875301b9eca567cfb2e58eaac1"
 dependencies = [
  "anyhow",
  "bincode",
  "cfg-if",
+ "hex",
  "serde",
+ "snowbridge-amcl",
 ]
 
 [[package]]
 name = "sp1-primitives"
-version = "1.1.0"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cb04c7a047b000dbab6b6e143f10e79a2cc5294d98fed74dc5dc11d374cef297"
+checksum = "efbeba375fe59917f162f1808c280d2e39e4698dc7eeac83936b6e70c2f8dbbc"
 dependencies = [
  "itertools 0.13.0",
  "lazy_static",
@@ -4625,9 +4804,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-prover"
-version = "1.1.0"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "906ed35cdb4d24050b1d00aa51abfdb986883c5280ca6b34b1cd50e673cfad02"
+checksum = "166e9f9fd29ecdfd4fd452d49052abdfbe735317f00016e94fde8410f90b4134"
 dependencies = [
  "anyhow",
  "bincode",
@@ -4647,13 +4826,15 @@ dependencies = [
  "serde",
  "serde_json",
  "serial_test",
- "sp1-core",
+ "sp1-core-executor",
+ "sp1-core-machine",
  "sp1-primitives",
  "sp1-recursion-circuit",
  "sp1-recursion-compiler",
  "sp1-recursion-core",
  "sp1-recursion-gnark-ffi",
  "sp1-recursion-program",
+ "sp1-stark",
  "subtle-encoding",
  "tempfile",
  "thiserror",
@@ -4663,9 +4844,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-recursion-circuit"
-version = "1.1.0"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "95a620b1c84ea7776deebf9eed2a5310c040f1b5b1db0709a2b36b86516f743d"
+checksum = "a3ccdda16cd078f32c6707212b8e8f3e423992eeff6ace898d3e15bf94e78a16"
 dependencies = [
  "bincode",
  "itertools 0.13.0",
@@ -4678,18 +4859,19 @@ dependencies = [
  "p3-matrix",
  "p3-util",
  "serde",
- "sp1-core",
+ "sp1-core-machine",
  "sp1-recursion-compiler",
  "sp1-recursion-core",
  "sp1-recursion-derive",
  "sp1-recursion-program",
+ "sp1-stark",
 ]
 
 [[package]]
 name = "sp1-recursion-compiler"
-version = "1.1.0"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cb5ef5565d25bf41f00280f0e09ab27cd39b8c8986af12c083e85a4061a49621"
+checksum = "ae17b6c8506b3521e78450cf28f76c2426b5b2f132bb89660d3d61eb155439c4"
 dependencies = [
  "backtrace",
  "itertools 0.13.0",
@@ -4703,19 +4885,23 @@ dependencies = [
  "p3-poseidon2",
  "p3-symmetric",
  "p3-util",
+ "rayon",
  "serde",
- "sp1-core",
+ "sp1-core-machine",
  "sp1-primitives",
  "sp1-recursion-core",
+ "sp1-recursion-core-v2",
  "sp1-recursion-derive",
+ "sp1-stark",
  "tracing",
+ "vec_map",
 ]
 
 [[package]]
 name = "sp1-recursion-core"
-version = "1.1.0"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5785177a892714601fd2f3e5e79af43d222bdedc415fb7cbdd52c9b1ee4dc3e2"
+checksum = "8414c3d16cd2fedd293989cef601915d4e1efab662e3a08923606970dc8ae7e6"
 dependencies = [
  "arrayref",
  "backtrace",
@@ -4739,19 +4925,62 @@ dependencies = [
  "p3-util",
  "serde",
  "serde_with",
- "sp1-core",
+ "sp1-core-executor",
+ "sp1-core-machine",
  "sp1-derive",
  "sp1-primitives",
+ "sp1-stark",
  "static_assertions",
  "tracing",
  "zkhash",
 ]
 
 [[package]]
-name = "sp1-recursion-derive"
-version = "1.1.0"
+name = "sp1-recursion-core-v2"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f5970fa689c5b3e41d2ea4a81f9207594b9befc2ba5ad9d8727b6bdbc7ba054e"
+checksum = "3d0a2af67ca6f7db964b7f1ffdb48f6e26f10e3cc027a11bdd17b224f8747650"
+dependencies = [
+ "arrayref",
+ "backtrace",
+ "ff 0.13.0",
+ "hashbrown 0.14.5",
+ "itertools 0.13.0",
+ "num_cpus",
+ "p3-air",
+ "p3-baby-bear",
+ "p3-bn254-fr",
+ "p3-challenger",
+ "p3-commit",
+ "p3-dft",
+ "p3-field",
+ "p3-fri",
+ "p3-matrix",
+ "p3-maybe-rayon",
+ "p3-merkle-tree",
+ "p3-poseidon2",
+ "p3-symmetric",
+ "p3-util",
+ "serde",
+ "serde_with",
+ "sp1-core-executor",
+ "sp1-core-machine",
+ "sp1-derive",
+ "sp1-primitives",
+ "sp1-recursion-core",
+ "sp1-stark",
+ "static_assertions",
+ "thiserror",
+ "tracing",
+ "vec_map",
+ "zkhash",
+]
+
+[[package]]
+name = "sp1-recursion-derive"
+version = "2.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4921db3912a60ee3896242ce336203066377e6eddd1c26d099e8bf6b9c470a21"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -4760,9 +4989,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-recursion-gnark-ffi"
-version = "1.1.0"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6aacdfec9e2895f0166125b89f3f058a25cdbbdce300839a46b240d3bafbac13"
+checksum = "718b2e92bfd3ce91fcef2ac0b3a8d31746dbc3ad4071f3bec45aa2e5e025adb1"
 dependencies = [
  "anyhow",
  "bincode",
@@ -4779,16 +5008,17 @@ dependencies = [
  "serde",
  "serde_json",
  "sha2",
- "sp1-core",
+ "sp1-core-machine",
  "sp1-recursion-compiler",
+ "sp1-stark",
  "tempfile",
 ]
 
 [[package]]
 name = "sp1-recursion-program"
-version = "1.1.0"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "40b570d8e40b8faad877e7c8604de8bc51f61dbee8ee7e0efe3ae7610585e69c"
+checksum = "676661b42f5d55c64932ad400ec920bd8b8098b1500b13c483a541bf3b396dd1"
 dependencies = [
  "itertools 0.13.0",
  "p3-air",
@@ -4806,32 +5036,35 @@ dependencies = [
  "p3-util",
  "rand",
  "serde",
- "sp1-core",
+ "sp1-core-executor",
+ "sp1-core-machine",
  "sp1-primitives",
  "sp1-recursion-compiler",
  "sp1-recursion-core",
+ "sp1-stark",
  "stacker",
  "tracing",
 ]
 
 [[package]]
 name = "sp1-sdk"
-version = "1.1.0"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6924c2ba6d0a522b17f29368f6db8ebd1bf2a424eb4d6e67308f1be4df9d860c"
+checksum = "2b289585392a3639f6541bce32dd89e03e7893f42e9b9bcf6bee7d54183d5e05"
 dependencies = [
  "alloy-sol-types",
  "anyhow",
  "async-trait",
- "axum",
  "bincode",
  "cfg-if",
  "dirs",
  "ethers",
  "futures",
+ "getrandom",
  "hashbrown 0.14.5",
  "hex",
  "indicatif",
+ "itertools 0.13.0",
  "log",
  "num-bigint 0.4.6",
  "p3-baby-bear",
@@ -4845,8 +5078,10 @@ dependencies = [
  "serde",
  "serde_json",
  "sha2",
- "sp1-core",
+ "sp1-core-executor",
+ "sp1-core-machine",
  "sp1-prover",
+ "sp1-stark",
  "strum",
  "strum_macros",
  "sysinfo",
@@ -4859,10 +5094,42 @@ dependencies = [
 ]
 
 [[package]]
-name = "sp1-zkvm"
-version = "1.1.0"
+name = "sp1-stark"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2b4490136e03f6fe931dc49559574bb6dbf5e6a86cae1f60dc3842d2b79905ed"
+checksum = "4048fc99a6c1123f5040b5ade1ae2839ca1be421e4c427fc7d1fd9bbf6e174f5"
+dependencies = [
+ "arrayref",
+ "getrandom",
+ "hashbrown 0.14.5",
+ "itertools 0.13.0",
+ "p3-air",
+ "p3-baby-bear",
+ "p3-challenger",
+ "p3-commit",
+ "p3-dft",
+ "p3-field",
+ "p3-fri",
+ "p3-matrix",
+ "p3-maybe-rayon",
+ "p3-merkle-tree",
+ "p3-poseidon2",
+ "p3-symmetric",
+ "p3-uni-stark",
+ "p3-util",
+ "rayon-scan",
+ "serde",
+ "sp1-derive",
+ "sp1-primitives",
+ "sysinfo",
+ "tracing",
+]
+
+[[package]]
+name = "sp1-zkvm"
+version = "2.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "66c525f67cfd3f65950f01c713a72c41a5d44d289155644c8ace4ec264098039"
 dependencies = [
  "bincode",
  "cfg-if",
@@ -5522,6 +5789,15 @@ name = "vcpkg"
 version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "accd4ea62f7bb7a82fe23066fb0957d48ef677f6eeb8215f372f52e48bb32426"
+
+[[package]]
+name = "vec_map"
+version = "0.8.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f1bddf1187be692e79c5ffeab891132dfb0f236ed36a43c7ed39f1165ee20191"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "vergen"
