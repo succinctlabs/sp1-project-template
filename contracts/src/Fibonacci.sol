@@ -11,7 +11,7 @@ struct PublicValuesStruct {
 
 /// @title Fibonacci.
 /// @author Succinct Labs
-/// @notice This contract implements a simple example of verifying the proof of a computing a
+/// @notice This contract implements a simple example of verifying the proof of computing a
 ///         fibonacci number.
 contract Fibonacci {
     /// @notice The address of the SP1 verifier contract.
