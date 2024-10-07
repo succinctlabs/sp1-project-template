@@ -15,12 +15,7 @@ generate an EVM-compatible proof.
 
 ### Build the Program
 
-To build the program, run the following command:
-
-```sh
-cd program
-cargo prove build
-```
+The program is automatically built through `script/build.rs` when the script is built.
 
 ### Execute the Program
 
