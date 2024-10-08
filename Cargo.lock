@@ -1729,14 +1729,13 @@ checksum = "28dea519a9695b9977216879a3ebfddf92f1c08c05d984f8996aecd6ecdc811d"
 name = "fibonacci-lib"
 version = "0.1.0"
 dependencies = [
- "alloy-sol-types",
+ "serde",
 ]
 
 [[package]]
 name = "fibonacci-program"
 version = "0.1.0"
 dependencies = [
- "alloy-sol-types",
  "fibonacci-lib",
  "sp1-zkvm",
 ]
@@ -1745,7 +1744,6 @@ dependencies = [
 name = "fibonacci-script"
 version = "0.1.0"
 dependencies = [
- "alloy-sol-types",
  "clap",
  "fibonacci-lib",
  "hex",

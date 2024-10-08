@@ -4,6 +4,5 @@ name = "fibonacci-program"
 edition = "2021"
 
 [dependencies]
-alloy-sol-types = { workspace = true }
 sp1-zkvm = { workspace = true }
 fibonacci-lib = { workspace = true }
