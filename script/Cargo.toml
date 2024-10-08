@@ -13,14 +13,14 @@ name = "evm"
 path = "src/bin/evm.rs"
 
 [dependencies]
-sp1-sdk = "2.0.0"
-serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
-serde = { version = "1.0", default-features = false, features = ["derive"] }
-clap = { version = "4.0", features = ["derive", "env"] }
-tracing = "0.1.40"
-hex = "0.4.3"
+sp1-sdk = { workspace = true }
+serde_json = { workspace = true }
+serde = { workspace = true }
+clap = { workspace = true }
+tracing = { workspace = true }
+hex = { workspace = true }
 alloy-sol-types = { workspace = true }
-fibonacci-lib = { path = "../lib" }
+fibonacci-lib = { workspace = true }
 
 [build-dependencies]
-sp1-helper = "2.0.0"
+sp1-helper = { workspace = true }
