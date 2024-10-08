@@ -10,8 +10,8 @@ that can generate a proof of any RISC-V program.
 
 ## Running the Project
 
-There are four main ways to run this project: build a program, execute a program, generate a core proof, and
-generate an EVM-compatible proof.
+There are three main ways to run this project: execute the program, generate a core proof, and
+generate an EVM-compatible Groth16 proof.
 
 ### Build the Program
 
