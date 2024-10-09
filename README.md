@@ -11,7 +11,7 @@ that can generate a proof of any RISC-V program.
 ## Running the Project
 
 There are three main ways to run this project: execute the program, generate a core proof, and
-generate an EVM-compatible Groth16 proof.
+generate a Groth16 or PLONK proof.
 
 ### Build the Program
 
