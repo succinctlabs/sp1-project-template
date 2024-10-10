@@ -8,7 +8,6 @@
 #![no_main]
 sp1_zkvm::entrypoint!(main);
 
-use alloy_sol_types::SolType;
 use fibonacci_lib::{fibonacci, PublicValuesStruct};
 
 pub fn main() {
@@ -22,9 +21,9 @@ pub fn main() {
     let (a, b) = fibonacci(n);
 
     // Encode the public values of the program.
-    let bytes = PublicValuesStruct::abi_encode(&PublicValuesStruct { n, a, b });
+    let bytes = PublicValuesStruct { n, a, b };
 
     // Commit to the public values of the program. The final proof will have a commitment to all the
     // bytes that were committed to.
-    sp1_zkvm::io::commit_slice(&bytes);
+    sp1_zkvm::io::commit(&bytes);
 }
