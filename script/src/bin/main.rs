@@ -10,7 +10,6 @@
 //! RUST_LOG=info cargo run --release -- --prove
 //! ```
 
-use alloy_sol_types::SolType;
 use clap::Parser;
 use fibonacci_lib::PublicValuesStruct;
 use sp1_sdk::{include_elf, ProverClient, SP1Stdin};
@@ -55,11 +54,11 @@ fn main() {
 
     if args.execute {
         // Execute the program
-        let (output, report) = client.execute(FIBONACCI_ELF, stdin).run().unwrap();
+        let (mut output, report) = client.execute(FIBONACCI_ELF, stdin).run().unwrap();
         println!("Program executed successfully.");
 
         // Read the output.
-        let decoded = PublicValuesStruct::abi_decode(output.as_slice(), true).unwrap();
+        let decoded = output.read::<PublicValuesStruct>();
         let PublicValuesStruct { n, a, b } = decoded;
         println!("n: {}", n);
         println!("a: {}", a);
