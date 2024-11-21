@@ -22,6 +22,16 @@ cd program
 cargo prove build
 ```
 
+The produced binary can be found in `target/elf-compilation/riscv32im-succinct-zkvm-elf/release`. 
+To reduce the size of the binary, uncomment the following lines in `Cargo.toml` (in the project root):
+
+```toml
+[profile.release]
+lto = "fat"
+opt-level = "s"
+strip = "symbols"
+```
+
 ### Execute the Program
 
 To run the program without generating a proof:
