@@ -6,7 +6,7 @@ that can generate a proof of any RISC-V program.
 ## Requirements
 
 - [Rust](https://rustup.rs/)
-- [SP1](https://docs.succinct.xyz/getting-started/install.html)
+- [SP1](https://docs.succinct.xyz/docs/getting-started/install.html)
 
 ## Running the Project
 
@@ -73,7 +73,7 @@ cargo prove vkey --program fibonacci-program
 
 ## Using the Prover Network
 
-We highly recommend using the Succinct prover network for any non-trivial programs or benchmarking purposes. For more information, see the [setup guide](https://docs.succinct.xyz/generating-proofs/prover-network.html).
+We highly recommend using the Succinct prover network for any non-trivial programs or benchmarking purposes. For more information, see the [setup guide](https://docs.succinct.xyz/docs/generating-proofs/prover-network.html).
 
 To get started, copy the example environment file:
 
