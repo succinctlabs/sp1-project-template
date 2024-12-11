@@ -5,5 +5,5 @@ edition = "2021"
 
 [dependencies]
 alloy-sol-types = { workspace = true }
-sp1-zkvm = { path = "../../../../crates/zkvm/entrypoint" }
+sp1-zkvm = "4.0.0-rc.1"
 fibonacci-lib = { path = "../lib" }
