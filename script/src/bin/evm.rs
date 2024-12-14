@@ -107,7 +107,7 @@ fn create_proof_fixture(
     // Note that the verification key stays the same regardless of the input.
     println!("Verification Key: {}", fixture.vkey);
 
-    // The public values are the values which are publicly committed to by the zkVM.
+    // The public values are the values that are publicly committed to by the zkVM.
     //
     // If you need to expose the inputs or outputs of your program, you should commit them in
     // the public values.
