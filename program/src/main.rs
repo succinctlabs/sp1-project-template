@@ -14,7 +14,7 @@ use fibonacci_lib::{fibonacci, PublicValuesStruct};
 pub fn main() {
     // Read an input to the program.
     //
-    // Behind the scenes, this compiles down to a custom system call which handles reading inputs
+    // Behind the scenes, this compiles down to a custom system call that handles reading inputs
     // from the prover.
     let n = sp1_zkvm::io::read::<u32>();
 
