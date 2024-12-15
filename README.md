@@ -6,7 +6,7 @@ that can generate a proof of any RISC-V program.
 ## Requirements
 
 - [Rust](https://rustup.rs/)
-- [SP1](https://docs.succinct.xyz/getting-started/install.html)
+- [SP1](https://docs.succinct.xyz/docs/getting-started/install)
 
 ## Running the Project
 
