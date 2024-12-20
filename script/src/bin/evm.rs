@@ -3,17 +3,24 @@
 //!
 //! You can run this script using the following command:
 //! ```shell
-//! RUST_LOG=info cargo run --release --bin evm
+//! RUST_LOG=info cargo run --release --bin evm -- --system groth16
+//! ```
+//! or
+//! ```shell
+//! RUST_LOG=info cargo run --release --bin evm -- --system plonk
 //! ```
 
-use alloy_sol_types::{sol, SolType};
-use clap::Parser;
+use alloy_sol_types::SolType;
+use clap::{Parser, ValueEnum};
+use fibonacci_lib::PublicValuesStruct;
 use serde::{Deserialize, Serialize};
-use sp1_sdk::{HashableKey, ProverClient, SP1ProofWithPublicValues, SP1Stdin, SP1VerifyingKey};
+use sp1_sdk::{
+    include_elf, HashableKey, ProverClient, SP1ProofWithPublicValues, SP1Stdin, SP1VerifyingKey,
+};
 use std::path::PathBuf;
 
 /// The ELF (executable and linkable format) file for the Succinct RISC-V zkVM.
-pub const FIBONACCI_ELF: &[u8] = include_bytes!("../../../program/elf/riscv32im-succinct-zkvm-elf");
+pub const FIBONACCI_ELF: &[u8] = include_elf!("fibonacci-program");
 
 /// The arguments for the EVM command.
 #[derive(Parser, Debug)]
@@ -21,12 +28,16 @@ pub const FIBONACCI_ELF: &[u8] = include_bytes!("../../../program/elf/riscv32im-
 struct EVMArgs {
     #[clap(long, default_value = "20")]
     n: u32,
+    #[clap(long, value_enum, default_value = "groth16")]
+    system: ProofSystem,
 }
 
-/// The public values encoded as a tuple that can be easily deserialized inside Solidity.
-type PublicValuesTuple = sol! {
-    tuple(uint32, uint32, uint32)
-};
+/// Enum representing the available proof systems
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum, Debug)]
+enum ProofSystem {
+    Plonk,
+    Groth16,
+}
 
 /// A fixture that can be used to test the verification of SP1 zkVM proofs inside Solidity.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -58,22 +69,27 @@ fn main() {
     stdin.write(&args.n);
 
     println!("n: {}", args.n);
+    println!("Proof System: {:?}", args.system);
 
-    // Generate the proof.
-    let proof = client
-        .prove(&pk, stdin)
-        .plonk()
-        .run()
-        .expect("failed to generate proof");
+    // Generate the proof based on the selected proof system.
+    let proof = match args.system {
+        ProofSystem::Plonk => client.prove(&pk, stdin).plonk().run(),
+        ProofSystem::Groth16 => client.prove(&pk, stdin).groth16().run(),
+    }
+    .expect("failed to generate proof");
 
-    create_plonk_fixture(&proof, &vk);
+    create_proof_fixture(&proof, &vk, args.system);
 }
 
 /// Create a fixture for the given proof.
-fn create_plonk_fixture(proof: &SP1ProofWithPublicValues, vk: &SP1VerifyingKey) {
+fn create_proof_fixture(
+    proof: &SP1ProofWithPublicValues,
+    vk: &SP1VerifyingKey,
+    system: ProofSystem,
+) {
     // Deserialize the public values.
     let bytes = proof.public_values.as_slice();
-    let (n, a, b) = PublicValuesTuple::abi_decode(bytes, false).unwrap();
+    let PublicValuesStruct { n, a, b } = PublicValuesStruct::abi_decode(bytes, false).unwrap();
 
     // Create the testing fixture so we can test things end-to-end.
     let fixture = SP1FibonacciProofFixture {
@@ -91,7 +107,7 @@ fn create_plonk_fixture(proof: &SP1ProofWithPublicValues, vk: &SP1VerifyingKey) 
     // Note that the verification key stays the same regardless of the input.
     println!("Verification Key: {}", fixture.vkey);
 
-    // The public values are the values whicha are publically commited to by the zkVM.
+    // The public values are the values which are publicly committed to by the zkVM.
     //
     // If you need to expose the inputs or outputs of your program, you should commit them in
     // the public values.
@@ -105,7 +121,7 @@ fn create_plonk_fixture(proof: &SP1ProofWithPublicValues, vk: &SP1VerifyingKey) 
     let fixture_path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../contracts/src/fixtures");
     std::fs::create_dir_all(&fixture_path).expect("failed to create fixture path");
     std::fs::write(
-        fixture_path.join("fixture.json"),
+        fixture_path.join(format!("{:?}-fixture.json", system).to_lowercase()),
         serde_json::to_string_pretty(&fixture).unwrap(),
     )
     .expect("failed to write fixture");
