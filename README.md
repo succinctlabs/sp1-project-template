@@ -63,14 +63,6 @@ cargo run --release --bin evm -- --system plonk
 These commands will also generate fixtures that can be used to test the verification of SP1 zkVM proofs
 inside Solidity.
 
-### Retrieve the Verification Key
-
-To retrieve your `programVKey` for your on-chain contract, run the following command:
-
-```sh
-cargo prove vkey --elf fibonacci-program
-```
-
 ## Using the Prover Network
 
 We highly recommend using the Succinct prover network for any non-trivial programs or benchmarking purposes. For more information, see the [setup guide](https://docs.succinct.xyz/docs/generating-proofs/prover-network).
@@ -81,12 +73,12 @@ To get started, copy the example environment file:
 cp .env.example .env
 ```
 
-Then, set the `SP1_PROVER` environment variable to `network` and set the `SP1_PRIVATE_KEY`
+Then, set the `SP1_PROVER` environment variable to `network` and set the `NETWORK_PRIVATE_KEY`
 environment variable to your whitelisted private key.
 
 For example, to generate an EVM-compatible proof using the prover network, run the following
 command:
 
 ```sh
-SP1_PROVER=network SP1_PRIVATE_KEY=... cargo run --release --bin evm
+SP1_PROVER=network NETWORK_PRIVATE_KEY=... cargo run --release --bin evm
 ```
