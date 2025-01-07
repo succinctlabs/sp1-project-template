@@ -12,9 +12,13 @@ path = "src/bin/main.rs"
 name = "evm"
 path = "src/bin/evm.rs"
 
+[[bin]]
+name = "vkey"
+path = "src/bin/vkey.rs"
+
 [dependencies]
-sp1-sdk = "3.0.0"
-serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
+sp1-sdk = "4.0.0-rc.8"
+serde_json = { version = "1.0.134", default-features = false, features = ["alloc"] }
 serde = { version = "1.0.200", default-features = false, features = ["derive"] }
 clap = { version = "4.0", features = ["derive", "env"] }
 tracing = "0.1.40"
