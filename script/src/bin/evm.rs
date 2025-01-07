@@ -54,6 +54,7 @@ struct SP1FibonacciProofFixture {
 fn main() {
     // Setup the logger.
     sp1_sdk::utils::setup_logger();
+    dotenv::dotenv().ok();
 
     // Parse the command line arguments.
     let args = EVMArgs::parse();
