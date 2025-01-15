@@ -45,7 +45,7 @@ fn main() {
     }
 
     // Setup the prover client.
-    let client = ProverClient::new();
+    let client = ProverClient::from_env();
 
     // Setup the inputs.
     let mut stdin = SP1Stdin::new();
@@ -55,7 +55,7 @@ fn main() {
 
     if args.execute {
         // Execute the program
-        let (output, report) = client.execute(FIBONACCI_ELF, stdin).run().unwrap();
+        let (output, report) = client.execute(FIBONACCI_ELF, &stdin).run().unwrap();
         println!("Program executed successfully.");
 
         // Read the output.
@@ -78,7 +78,7 @@ fn main() {
 
         // Generate the proof
         let proof = client
-            .prove(&pk, stdin)
+            .prove(&pk, &stdin)
             .run()
             .expect("failed to generate proof");
 
