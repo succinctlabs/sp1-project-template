@@ -81,12 +81,12 @@ To get started, copy the example environment file:
 cp .env.example .env
 ```
 
-Then, set the `SP1_PROVER` environment variable to `network` and set the `SP1_PRIVATE_KEY`
+Then, set the `SP1_PROVER` environment variable to `network` and set the `NETWORK_PRIVATE_KEY`
 environment variable to your whitelisted private key.
 
 For example, to generate an EVM-compatible proof using the prover network, run the following
 command:
 
 ```sh
-SP1_PROVER=network SP1_PRIVATE_KEY=... cargo run --release --bin evm
+SP1_PROVER=network NETWORK_PRIVATE_KEY=... cargo run --release --bin evm
 ```
