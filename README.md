@@ -65,10 +65,10 @@ inside Solidity.
 
 ### Retrieve the Verification Key
 
-To retrieve your `programVKey` for your on-chain contract, run the following command:
+To retrieve your `programVKey` for your on-chain contract, run the following command in `script`:
 
 ```sh
-cargo prove vkey --program fibonacci-program
+cargo run --release --bin vkey
 ```
 
 ## Using the Prover Network
