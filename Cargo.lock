@@ -1713,7 +1713,7 @@ dependencies = [
  "hex",
  "serde",
  "serde_json",
- "sp1-helper",
+ "sp1-build",
  "sp1-sdk",
  "tracing",
 ]
@@ -4322,15 +4322,6 @@ checksum = "0e0d6abd68038a6f688601cdd0cbec17b56f56e5d10e3f34f1a42bee8cc7ca2c"
 dependencies = [
  "quote",
  "syn 1.0.109",
-]
-
-[[package]]
-name = "sp1-helper"
-version = "4.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bfeb036e069d9c621c99579e90175e71f2a59232b2ecdb3c44a31f5e601e5259"
-dependencies = [
- "sp1-build",
 ]
 
 [[package]]
