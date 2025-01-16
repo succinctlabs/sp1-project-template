@@ -1,6 +1,6 @@
 # SP1 Project Template Contracts
 
-This is a template for writing a contract that uses verification of [SP1](https://github.com/succinctlabs/sp1) PlonK proofs onchain using the [SP1VerifierGateway](https://github.com/succinctlabs/sp1-contracts/blob/main/contracts/src/SP1VerifierGateway.sol).
+This is a template for writing a contract that uses verification of [SP1](https://github.com/succinctlabs/sp1) PLONK proofs onchain using the [SP1VerifierGateway](https://github.com/succinctlabs/sp1-contracts/blob/main/contracts/src/SP1VerifierGateway.sol).
 
 ## Requirements
 
@@ -16,7 +16,7 @@ forge test -v
 
 #### Step 1: Set the `VERIFIER` environment variable
 
-Find the address of the `verifer` to use from the [deployments](https://github.com/succinctlabs/sp1-contracts/tree/main/contracts/deployments) list for the chain you are deploying to. Set it to the `VERIFIER` environment variable, for example:
+Find the address of the `verifier` to use from the [deployments](https://github.com/succinctlabs/sp1-contracts/tree/main/contracts/deployments) list for the chain you are deploying to. Set it to the `VERIFIER` environment variable, for example:
 
 ```sh
 VERIFIER=0x3B6041173B80E77f038f3F2C0f9744f04837185e
