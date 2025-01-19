@@ -8,3 +8,9 @@ resolver = "2"
 
 [workspace.dependencies]
 alloy-sol-types = "0.7.7"
+
+## Uncomment to minimize the size of produced RISC-V binary
+#[profile.release]
+#lto = "fat"
+#opt-level = "s"
+#strip = "symbols"
