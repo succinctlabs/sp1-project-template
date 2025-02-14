@@ -4,6 +4,8 @@ pragma solidity ^0.8.20;
 import {Test, console} from "forge-std/Test.sol";
 import {stdJson} from "forge-std/StdJson.sol";
 import {Fibonacci} from "../src/Fibonacci.sol";
+import {SP1Verifier as SP1VerifierGroth16, Groth16Verifier} from "@sp1-contracts/v4.0.0-rc.3/SP1VerifierGroth16.sol";
+import {SP1Verifier as SP1VerifierPlonk} from "@sp1-contracts/v4.0.0-rc.3/SP1VerifierPlonk.sol";
 import {SP1VerifierGateway} from "@sp1-contracts/SP1VerifierGateway.sol";
 
 struct SP1ProofFixtureJson {
@@ -18,7 +20,7 @@ struct SP1ProofFixtureJson {
 contract FibonacciGroth16Test is Test {
     using stdJson for string;
 
-    address verifier;
+    SP1VerifierGroth16 internal verifier;
     Fibonacci public fibonacci;
 
     function loadFixture() public view returns (SP1ProofFixtureJson memory) {
@@ -31,15 +33,12 @@ contract FibonacciGroth16Test is Test {
 
     function setUp() public {
         SP1ProofFixtureJson memory fixture = loadFixture();
-
-        verifier = address(new SP1VerifierGateway(address(1)));
-        fibonacci = new Fibonacci(verifier, fixture.vkey);
+        verifier = new SP1VerifierGroth16();
+        fibonacci = new Fibonacci(address(verifier), fixture.vkey);
     }
 
-    function test_ValidFibonacciProof() public {
+    function test_ValidFibonacciProof() public view {
         SP1ProofFixtureJson memory fixture = loadFixture();
-
-        vm.mockCall(verifier, abi.encodeWithSelector(SP1VerifierGateway.verifyProof.selector), abi.encode(true));
 
         (uint32 n, uint32 a, uint32 b) = fibonacci.verifyFibonacciProof(fixture.publicValues, fixture.proof);
         assert(n == fixture.n);
@@ -47,21 +46,22 @@ contract FibonacciGroth16Test is Test {
         assert(b == fixture.b);
     }
 
-    function testFail_InvalidFibonacciProof() public view {
+    function test_RevertInvalidFibonacciProof() public {
         SP1ProofFixtureJson memory fixture = loadFixture();
 
         // Create a fake proof.
-        bytes memory fakeProof = new bytes(fixture.proof.length);
+        // The first 4 bytes are from the verifier hash to ensure for the correct verifier
+        bytes memory fakeProof = bytes.concat(bytes4(verifier.VERIFIER_HASH()), new bytes(fixture.proof.length - 4));
 
+        vm.expectRevert(abi.encodeWithSelector(Groth16Verifier.ProofInvalid.selector));
         fibonacci.verifyFibonacciProof(fixture.publicValues, fakeProof);
     }
 }
 
-
 contract FibonacciPlonkTest is Test {
     using stdJson for string;
 
-    address verifier;
+    SP1VerifierPlonk internal verifier;
     Fibonacci public fibonacci;
 
     function loadFixture() public view returns (SP1ProofFixtureJson memory) {
@@ -75,14 +75,12 @@ contract FibonacciPlonkTest is Test {
     function setUp() public {
         SP1ProofFixtureJson memory fixture = loadFixture();
 
-        verifier = address(new SP1VerifierGateway(address(1)));
-        fibonacci = new Fibonacci(verifier, fixture.vkey);
+        verifier = new SP1VerifierPlonk();
+        fibonacci = new Fibonacci(address(verifier), fixture.vkey);
     }
 
-    function test_ValidFibonacciProof() public {
+    function test_ValidFibonacciProof() public view {
         SP1ProofFixtureJson memory fixture = loadFixture();
-
-        vm.mockCall(verifier, abi.encodeWithSelector(SP1VerifierGateway.verifyProof.selector), abi.encode(true));
 
         (uint32 n, uint32 a, uint32 b) = fibonacci.verifyFibonacciProof(fixture.publicValues, fixture.proof);
         assert(n == fixture.n);
@@ -90,12 +88,15 @@ contract FibonacciPlonkTest is Test {
         assert(b == fixture.b);
     }
 
-    function testFail_InvalidFibonacciProof() public view {
+    function test_RevertInvalidFibonacciProof() public {
         SP1ProofFixtureJson memory fixture = loadFixture();
 
         // Create a fake proof.
-        bytes memory fakeProof = new bytes(fixture.proof.length);
+        // The first 4 bytes are from the verifier hash to ensure for the correct verifier
+        bytes memory fakeProof = bytes.concat(bytes4(verifier.VERIFIER_HASH()), new bytes(fixture.proof.length - 4));
 
+        // The plonk verifier throws slightly differently than groth16, so we just check that is reverts
+        vm.expectRevert();
         fibonacci.verifyFibonacciProof(fixture.publicValues, fakeProof);
     }
 }
