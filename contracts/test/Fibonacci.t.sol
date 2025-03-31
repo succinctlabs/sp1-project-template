@@ -47,7 +47,9 @@ contract FibonacciGroth16Test is Test {
         assert(b == fixture.b);
     }
 
-    function testFail_InvalidFibonacciProof() public view {
+    function testRevert_InvalidFibonacciProof() public {
+        vm.expectRevert();
+
         SP1ProofFixtureJson memory fixture = loadFixture();
 
         // Create a fake proof.
@@ -90,7 +92,9 @@ contract FibonacciPlonkTest is Test {
         assert(b == fixture.b);
     }
 
-    function testFail_InvalidFibonacciProof() public view {
+    function testRevert_InvalidFibonacciProof() public {
+        vm.expectRevert();
+
         SP1ProofFixtureJson memory fixture = loadFixture();
 
         // Create a fake proof.
