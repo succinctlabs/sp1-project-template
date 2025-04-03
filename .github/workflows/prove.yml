@@ -43,5 +43,4 @@ jobs:
 
       - name: Execute SP1 program
         run: |
-          cd ../script
           cargo run --release -- --execute
