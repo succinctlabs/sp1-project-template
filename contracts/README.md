@@ -16,7 +16,7 @@ forge test -v
 
 #### Step 1: Set the `VERIFIER` environment variable
 
-Find the address of the `verifer` to use from the [deployments](https://github.com/succinctlabs/sp1-contracts/tree/main/contracts/deployments) list for the chain you are deploying to. Set it to the `VERIFIER` environment variable, for example:
+Find the address of the `verifier` to use from the [deployments](https://github.com/succinctlabs/sp1-contracts/tree/main/contracts/deployments) list for the chain you are deploying to. Set it to the `VERIFIER` environment variable, for example:
 
 ```sh
 VERIFIER=0x3B6041173B80E77f038f3F2C0f9744f04837185e

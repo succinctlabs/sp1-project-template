@@ -24,11 +24,11 @@ pub const FIBONACCI_ELF: &[u8] = include_elf!("fibonacci-program");
 
 /// The arguments for the EVM command.
 #[derive(Parser, Debug)]
-#[clap(author, version, about, long_about = None)]
+#[command(author, version, about, long_about = None)]
 struct EVMArgs {
-    #[clap(long, default_value = "20")]
+    #[arg(long, default_value = "20")]
     n: u32,
-    #[clap(long, value_enum, default_value = "groth16")]
+    #[arg(long, value_enum, default_value = "groth16")]
     system: ProofSystem,
 }
 

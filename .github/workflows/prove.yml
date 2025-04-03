@@ -14,8 +14,11 @@ jobs:
     strategy:
       fail-fast: true
 
-    name: Build
-    runs-on: ubuntu-20.04
+    name: Build and Execute
+    runs-on:
+      - runs-on
+      - runner=16cpu-linux-x64
+      - run-id=${{ github.run_id }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -25,7 +28,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: 1.81.0
+          toolchain: 1.85.0
 
       - name: Install SP1 toolchain
         run: |
@@ -37,3 +40,8 @@ jobs:
         run: |
           cd program
           ~/.sp1/bin/cargo-prove prove build
+
+      - name: Execute SP1 program
+        run: |
+          cd ../script
+          cargo run --release -- --execute
