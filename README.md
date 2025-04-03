@@ -10,17 +10,12 @@ that can generate a proof of any RISC-V program.
 
 ## Running the Project
 
-There are four main ways to run this project: build a program, execute a program, generate a core proof, and
+There are 3 main ways to run this project: execute a program, generate a core proof, and
 generate an EVM-compatible proof.
 
 ### Build the Program
 
-To build the program, run the following command:
-
-```sh
-cd program
-cargo prove build
-```
+The program is automatically built through `script/build.rs` when the script is built.
 
 ### Execute the Program
 
