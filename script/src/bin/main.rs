@@ -20,15 +20,15 @@ pub const FIBONACCI_ELF: &[u8] = include_elf!("fibonacci-program");
 
 /// The arguments for the command.
 #[derive(Parser, Debug)]
-#[clap(author, version, about, long_about = None)]
+#[command(author, version, about, long_about = None)]
 struct Args {
-    #[clap(long)]
+    #[arg(long)]
     execute: bool,
 
-    #[clap(long)]
+    #[arg(long)]
     prove: bool,
 
-    #[clap(long, default_value = "20")]
+    #[arg(long, default_value = "20")]
     n: u32,
 }
 
