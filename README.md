@@ -45,9 +45,9 @@ cargo run --release -- --prove
 ### Generate an EVM-Compatible Proof
 
 > [!WARNING]
-> You will need at least 32GB RAM to generate a Groth16 or PLONK proof.
+> You will need at least 16GB RAM to generate a Groth16 or PLONK proof. View the [SP1 docs](https://docs.succinct.xyz/docs/sp1/getting-started/hardware-requirements#local-proving) for more information.
 
-Generating a proof that is cheap to verify on the EVM (e.g. Groth16 or PLONK) is more complex than generating a core proof.
+Generating a proof that is cheap to verify on the EVM (e.g. Groth16 or PLONK) is more intensive than generating a core proof.
 
 To generate a Groth16 proof:
 
@@ -75,7 +75,7 @@ cargo run --release --bin vkey
 
 ## Using the Prover Network
 
-We highly recommend using the Succinct prover network for any non-trivial programs or benchmarking purposes. For more information, see the [key setup guide](https://docs.succinct.xyz/docs/network/developers/key-setup) to get started.
+We highly recommend using the [Succinct Prover Network](https://docs.succinct.xyz/docs/network/introduction) for any non-trivial programs or benchmarking purposes. For more information, see the [key setup guide](https://docs.succinct.xyz/docs/network/developers/key-setup) to get started.
 
 To get started, copy the example environment file:
 
