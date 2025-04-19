@@ -60,7 +60,7 @@ fn main() {
         println!("Program executed successfully.");
 
         // Read the output.
-        let decoded = PublicValuesStruct::abi_decode(output.as_slice(), true).unwrap();
+        let decoded = PublicValuesStruct::abi_decode(output.as_slice()).unwrap();
         let PublicValuesStruct { n, a, b } = decoded;
         println!("n: {}", n);
         println!("a: {}", a);
