@@ -4,7 +4,7 @@ This is a template for writing a contract that uses verification of [SP1](https:
 
 ## Requirements
 
-- [Foundry](https://book.getfoundry.sh/getting-started/installation)
+- [Foundry](https://getfoundry.sh/getting-started/installation)
 
 ## Test
 
