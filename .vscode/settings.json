@@ -1,8 +1,4 @@
 {
-    "rust-analyzer.linkedProjects": [
-        "program/Cargo.toml",
-        "script/Cargo.toml"
-    ],
     "rust-analyzer.check.overrideCommand": [
         "cargo",
         "clippy",
@@ -18,10 +14,6 @@
         "RUST_LOG": "debug",
         "RUSTFLAGS": "-Ctarget-cpu=native"
     },
-    "rust-analyzer.runnables.extraArgs": [
-        "--release",
-        "+nightly"
-    ],
     "rust-analyzer.diagnostics.disabled": [
         "unresolved-proc-macro"
     ],
