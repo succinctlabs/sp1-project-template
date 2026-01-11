@@ -70,7 +70,7 @@ cargo run --release --bin vkey
 
 ## Using the Prover Network
 
-We highly recommend using the [Succinct Prover Network](https://docs.succinct.xyz/docs/network/introduction) for any non-trivial programs or benchmarking purposes. For more information, see the [key setup guide](https://docs.succinct.xyz/docs/network/developers/key-setup) to get started.
+We highly recommend using the [Succinct Prover Network](https://docs.succinct.xyz/docs/sp1/prover-network/quickstart) for any non-trivial programs or benchmarking purposes. For more information, see the [key setup guide](https://docs.succinct.xyz/docs/sp1/prover-network/quickstart#step-1-requester-key-setup) to get started.
 
 To get started, copy the example environment file:
 
