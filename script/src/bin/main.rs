@@ -13,10 +13,13 @@
 use alloy_sol_types::SolType;
 use clap::Parser;
 use fibonacci_lib::PublicValuesStruct;
-use sp1_sdk::{include_elf, ProverClient, SP1Stdin};
+use sp1_sdk::{
+    blocking::{ProveRequest, Prover, ProverClient},
+    include_elf, Elf, ProvingKey, SP1Stdin,
+};
 
 /// The ELF (executable and linkable format) file for the Succinct RISC-V zkVM.
-pub const FIBONACCI_ELF: &[u8] = include_elf!("fibonacci-program");
+const FIBONACCI_ELF: Elf = include_elf!("fibonacci-program");
 
 /// The arguments for the command.
 #[derive(Parser, Debug)]
@@ -56,7 +59,7 @@ fn main() {
 
     if args.execute {
         // Execute the program
-        let (output, report) = client.execute(FIBONACCI_ELF, &stdin).run().unwrap();
+        let (output, report) = client.execute(FIBONACCI_ELF, stdin).run().unwrap();
         println!("Program executed successfully.");
 
         // Read the output.
@@ -75,18 +78,20 @@ fn main() {
         println!("Number of cycles: {}", report.total_instruction_count());
     } else {
         // Setup the program for proving.
-        let (pk, vk) = client.setup(FIBONACCI_ELF);
+        let pk = client.setup(FIBONACCI_ELF).expect("failed to setup elf");
 
         // Generate the proof
         let proof = client
-            .prove(&pk, &stdin)
+            .prove(&pk, stdin)
             .run()
             .expect("failed to generate proof");
 
         println!("Successfully generated proof!");
 
         // Verify the proof.
-        client.verify(&proof, &vk).expect("failed to verify proof");
+        client
+            .verify(&proof, pk.verifying_key(), None)
+            .expect("failed to verify proof");
         println!("Successfully verified proof!");
     }
 }

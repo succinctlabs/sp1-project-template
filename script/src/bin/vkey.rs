@@ -1,10 +1,10 @@
-use sp1_sdk::{include_elf, HashableKey, Prover, ProverClient};
+use sp1_sdk::{blocking::MockProver, blocking::Prover, include_elf, Elf, HashableKey, ProvingKey};
 
 /// The ELF (executable and linkable format) file for the Succinct RISC-V zkVM.
-pub const FIBONACCI_ELF: &[u8] = include_elf!("fibonacci-program");
+const FIBONACCI_ELF: Elf = include_elf!("fibonacci-program");
 
 fn main() {
-    let prover = ProverClient::builder().cpu().build();
-    let (_, vk) = prover.setup(FIBONACCI_ELF);
-    println!("{}", vk.bytes32());
+    let prover = MockProver::new();
+    let pk = prover.setup(FIBONACCI_ELF).expect("failed to setup elf");
+    println!("{}", pk.verifying_key().bytes32());
 }
