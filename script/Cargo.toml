@@ -20,7 +20,7 @@ path = "src/bin/vkey.rs"
 sp1-sdk = { git = "https://github.com/succinctlabs/sp1-wip.git", features = [
     "blocking",
     "native-gnark",
-], branch = "multilinear_v6" }
+], branch = "yuwen/artifacts" }
 serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
 serde = { version = "1.0.200", default-features = false, features = ["derive"] }
 clap = { version = "4.0", features = ["derive", "env"] }
@@ -31,4 +31,4 @@ fibonacci-lib = { path = "../lib" }
 dotenv = "0.15.0"
 
 [build-dependencies]
-sp1-build = { git = "https://github.com/succinctlabs/sp1-wip.git", branch = "multilinear_v6" }
+sp1-build = { git = "https://github.com/succinctlabs/sp1-wip.git", branch = "yuwen/artifacts" }
