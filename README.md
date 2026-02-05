@@ -70,7 +70,7 @@ cargo run --release --bin vkey
 
 ## Using the Prover Network
 
-We highly recommend using the [Succinct Prover Network](https://docs.succinct.xyz/docs/next/network/introduction) for any non-trivial programs or benchmarking purposes. For more information, see the [quickstart guide](https://docs.succinct.xyz/docs/next/sp1/prover-network/quickstart).
+We highly recommend using the Succinct Prover Network for any non-trivial programs or benchmarking purposes. For more information, see the [quickstart guide](https://docs.succinct.xyz/docs/next/sp1/prover-network/quickstart).
 
 To get started, copy the example environment file:
 
